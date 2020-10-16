@@ -2,7 +2,6 @@
 //Show form on page
 //On click of submit button, return user values and close form
 
-//Add the rest of the required ToDo properties to this form
 const showToDoForm = (content) => {
     const newForm = document.createElement('form');
 
@@ -62,12 +61,38 @@ const showToDoForm = (content) => {
     newForm.appendChild(submit);
 
     content.appendChild(newForm);
-
-    //Return user values so index can create new ToDo object?
 }
 
+//Function to remove form when it is submitted or canceled
 const removeToDoForm = (content, form) => {
     content.removeChild(form);
 }
 
-export {showToDoForm, removeToDoForm};
+//Function to render todo on page
+const renderToDo = (projectDOM, title, description, dueDate, priority) => {
+    //variableDOM convention used to indicate that these are elements rendered in DOM tree,
+    //rather than the variables used in the app's logic
+    const toDoDOM = document.createElement('div');
+    toDoDOM.classList.add('to-do');
+
+    const titleDOM = document.createElement('h3');
+    titleDOM.innerHTML = title;
+    toDoDOM.appendChild(titleDOM);
+
+    const descriptionDOM = document.createElement('p');
+    descriptionDOM.innerHTML = description;
+    toDoDOM.appendChild(descriptionDOM);
+
+    const dueDateDOM = document.createElement('p');
+    dueDateDOM.innerHTML = dueDate;
+    toDoDOM.appendChild(dueDateDOM);
+
+    //May need to take priorityDOM out if it is not displayed on page
+    const priorityDOM = document.createElement('p');
+    priorityDOM.innerHTML = priority;
+    toDoDOM.appendChild(priorityDOM);
+
+    projectDOM.appendChild(toDoDOM);
+}
+
+export {showToDoForm, removeToDoForm, renderToDo};

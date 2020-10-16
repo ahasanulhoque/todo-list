@@ -1,6 +1,6 @@
 import {toDo} from './todo-logic.js';
 import {renderPage} from './render-page.js'
-import {showToDoForm, removeToDoForm} from './render-todo.js'
+import {showToDoForm, removeToDoForm, renderToDo} from './render-todo.js'
 
 //Test toDo object
 const hw = toDo('Homework', 'Homework', '12/1/20', 1);
@@ -14,7 +14,10 @@ content.onclick = function(e){
     if (button.className == 'new-to-do'){
         //Call a form function from a render module
         showToDoForm(content);
+
         let form = document.querySelector('form');
+
+        //Listen for clicks on new todo form, for submit or cancel buttons
         form.onclick = function(f){
             let newButton = f.target;
             if (newButton.tagName == 'BUTTON'){
@@ -26,7 +29,11 @@ content.onclick = function(e){
                                         form.elements.namedItem('description').value,
                                         form.elements.namedItem('date').value,
                                         form.elements.namedItem('priority').value);
-                    console.log(newToDo);
+                    console.log(newToDo); //Test if working
+                    //Next: render todo on page
+                    const currentProject = document.querySelector('#content div');
+                    renderToDo(currentProject, newToDo.title, newToDo.description,
+                                newToDo.dueDate, newToDo.priority);
                 }
             }
         }
