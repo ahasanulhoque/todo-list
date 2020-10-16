@@ -15,14 +15,16 @@ content.onclick = function(e){
         //Call a form function from a render module
         showToDoForm(content);
 
+        //Select the form now shown on screen
         let form = document.querySelector('form');
 
         //Listen for clicks on new todo form, for submit or cancel buttons
         form.onclick = function(f){
             let newButton = f.target;
             if (newButton.tagName == 'BUTTON'){
+                //If submit or cancel button is selected, remove the form
                 removeToDoForm(content,form);
-                if (newButton.id = 'submit-to-do'){
+                if (newButton.id == 'submit-to-do'){
                     //If todo form is submitted instead of canceled
                     //create new todo object
                     let newToDo = toDo(form.elements.namedItem('title').value,

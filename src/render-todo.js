@@ -60,6 +60,12 @@ const showToDoForm = (content) => {
     submit.innerHTML = 'Add ToDo';
     newForm.appendChild(submit);
 
+    const cancel = document.createElement('button');
+    cancel.setAttribute('type', 'button');
+    cancel.id = 'cancel-to-do';
+    cancel.innerHTML = 'Cancel';
+    newForm.appendChild(cancel);
+
     content.appendChild(newForm);
 }
 
