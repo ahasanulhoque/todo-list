@@ -1,21 +1,30 @@
 import {renderPage} from './render-page.js'
 import {Project} from './project-logic.js'
 import {toDo} from './todo-logic.js';
+import {showProjectForm} from './render-project.js'
 import {showToDoForm, removeToDoForm, renderToDo} from './render-todo.js'
 
 const PageController = (() => {
     const content = document.querySelector('#content');
     const defaultProject = Project();
 
+    let projectCount = 1; //This variable will be used to name project
+                          //variables
+
     content.onclick = function(e){
         //Listen for creation of new projects or new todos
         let button = e.target;
 
         if (button.id == 'new-project'){
+
             //allow user to create a project
-        }
-        
-        if (button.className == 'new-to-do'){
+            //Call a function to show a form to create a new project
+            //Use projectCount variable to name array here (e.g. project1, project2)
+            //and then increment
+
+            showProjectForm(content);
+
+        } else if (button.className == 'new-to-do'){
             //Call a form function from a render module
             showToDoForm(content);
 
@@ -28,10 +37,10 @@ const PageController = (() => {
                 if (newButton.tagName == 'BUTTON'){
                     //If submit or cancel button is selected, remove the form
                     removeToDoForm(content,form);
-                    if (newButton.id == 'submit-to-do'){
+                    if (newButton.id == 'submit-todo'){
                         //If todo form is submitted instead of canceled
                         //create new todo object
-                        let newToDo = toDo(form.elements.namedItem('title').value,
+                        let newToDo = toDo(form.elements.namedItem('todo-title').value,
                                             form.elements.namedItem('description').value,
                                             form.elements.namedItem('date').value,
                                             form.elements.namedItem('priority').value);

@@ -10,12 +10,12 @@ const showToDoForm = (content) => {
     newForm.appendChild(toDoTitle);
 
     const titleLabel = document.createElement('label');
-    titleLabel.setAttribute('for', 'title');
+    titleLabel.setAttribute('for', 'todo-title');
     titleLabel.innerHTML = 'ToDo Title';
     newForm.appendChild(titleLabel);
 
     const titleInput = document.createElement('input');
-    titleInput.setAttribute('name', 'title');
+    titleInput.setAttribute('name', 'todo-title');
     titleInput.setAttribute('type', 'text');
     titleInput.setAttribute('placeholder', 'ToDo Title');
     newForm.appendChild(titleInput);
@@ -56,13 +56,13 @@ const showToDoForm = (content) => {
 
     const submit = document.createElement('button');
     submit.setAttribute('type', 'button');
-    submit.id = 'submit-to-do';
+    submit.id = 'submit-todo';
     submit.innerHTML = 'Add ToDo';
     newForm.appendChild(submit);
 
     const cancel = document.createElement('button');
     cancel.setAttribute('type', 'button');
-    cancel.id = 'cancel-to-do';
+    cancel.id = 'cancel-todo';
     cancel.innerHTML = 'Cancel';
     newForm.appendChild(cancel);
 
