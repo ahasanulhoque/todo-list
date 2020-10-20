@@ -8,8 +8,13 @@ const PageController = (() => {
     const defaultProject = Project();
 
     content.onclick = function(e){
-        //Listen for creation of newToDos
+        //Listen for creation of new projects or new todos
         let button = e.target;
+
+        if (button.id == 'new-project'){
+            //allow user to create a project
+        }
+        
         if (button.className == 'new-to-do'){
             //Call a form function from a render module
             showToDoForm(content);
