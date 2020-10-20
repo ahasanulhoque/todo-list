@@ -78,6 +78,9 @@ const removeToDoForm = (content, form) => {
 const renderToDo = (projectDOM, title, description, dueDate, priority) => {
     //variableDOM convention used to indicate that these are elements rendered in DOM tree,
     //rather than the variables used in the app's logic
+
+    //This function will also need buttons to set as complete or delete
+    
     const toDoDOM = document.createElement('div');
     toDoDOM.classList.add('to-do');
 
