@@ -6,10 +6,11 @@ import {showToDoForm, removeToDoForm, renderToDo} from './render-todo.js'
 
 const PageController = (() => {
     const content = document.querySelector('#content');
-    const defaultProject = Project();
+    const defaultProject = Project('default');
 
-    let projectCount = 1; //This variable will be used to name project
-                          //variables
+    let projectsList = []; //All projects will go in this array
+    let projectCount = 0; //This variable will be used to store
+                          //arrays in projectsList at index
 
     content.onclick = function(e){
         //Listen for creation of new projects or new todos
@@ -49,7 +50,7 @@ const PageController = (() => {
                         //Push to projects array and console.log to test if
                         //it's working
                         defaultProject.todos.push(newToDo);
-                        console.log(defaultProject.todos);
+                        console.log(defaultProject);
 
                         //Next: render todo on page
                         const currentProject = document.querySelector('#content div');

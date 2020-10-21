@@ -1,7 +1,7 @@
-const Project = () => {
+const Project = (name) => {
     let todos = [];
 
-    return {todos}
+    return {name, todos}
 }
 
 export {Project}
