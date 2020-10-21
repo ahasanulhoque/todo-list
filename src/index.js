@@ -8,7 +8,8 @@ const PageController = (() => {
     const content = document.querySelector('#content');
     const defaultProject = Project('default');
 
-    let projectsList = []; //All projects will go in this array
+    let projectsList = []; //All project objects will go in this array
+    projectsList.push(defaultProject);
     let projectCount = 0; //This variable will be used to store
                           //arrays in projectsList at index
 
@@ -20,10 +21,28 @@ const PageController = (() => {
 
             //allow user to create a project
             //Call a function to show a form to create a new project
-            //Use projectCount variable to name array here (e.g. project1, project2)
-            //and then increment
 
             showProjectForm(content);
+            //Select the form now shown on screen
+            let form = document.querySelector('form');
+
+            //Listen for clicks to add a project, or cancel the project form
+            form.onclick = function(f){
+                let newButton = f.target;
+                if (newButton.tagName == 'BUTTON'){
+                    //If either button is clicked, remove the form
+                    removeToDoForm(content, form);
+
+                    //If form is submitted, add a project
+                    if (newButton.id == 'submit-project'){
+                        let newProject = Project(form.elements.namedItem('project-title').value);
+
+                        //Push to projectsList array and test if working
+                        projectsList.push(newProject);
+                        console.log(projectsList);
+                    }
+                }
+            }
 
         } else if (button.className == 'new-to-do'){
             //Call a form function from a render module
