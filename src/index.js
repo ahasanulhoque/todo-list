@@ -1,7 +1,7 @@
 import {renderPage} from './render-page.js'
 import {Project} from './project-logic.js'
 import {toDo} from './todo-logic.js';
-import {showProjectForm} from './render-project.js'
+import {showProjectForm, renderProject} from './render-project.js'
 import {showToDoForm, removeToDoForm, renderToDo} from './render-todo.js'
 
 const PageController = (() => {
@@ -40,6 +40,9 @@ const PageController = (() => {
                         //Push to projectsList array and test if working
                         projectsList.push(newProject);
                         console.log(projectsList);
+
+                        //Render new project on page
+                        renderProject(content, newProject.name);
                     }
                 }
             }
@@ -72,6 +75,7 @@ const PageController = (() => {
                         console.log(defaultProject);
 
                         //Next: render todo on page
+                        //currentProject needs to be updated to select correct project
                         const currentProject = document.querySelector('#content div');
                         renderToDo(currentProject, newToDo.title, newToDo.description,
                                     newToDo.dueDate, newToDo.priority);
