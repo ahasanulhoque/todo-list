@@ -1,5 +1,6 @@
 const showProjectForm = (content) => {
     const projectForm = document.createElement('form');
+    projectForm.id = 'project-form';
 
     const projectTitleLabel = document.createElement('label');
     projectTitleLabel.setAttribute('for', 'project-title');
