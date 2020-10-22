@@ -1,6 +1,16 @@
-const renderSidebar = () => {
+const renderSidebar = (projectName) => {
     //render the sidebar
     //should have project titles and todo titles
+
+    const sidebar = document.querySelector('#sidebar');
+
+    const projectSide = document.createElement('div');  //The sidebar instance of the whole project
+    
+    const projectSideName = document.createElement('h3');
+    projectSideName.innerHTML = projectName;
+
+    projectSide.appendChild(projectSideName);
+    sidebar.appendChild(projectSide);
 }
 
 const renderMain = () => {
@@ -19,11 +29,8 @@ const renderPage = (() => {
     newProject.innerHTML = 'New Project';
     newProject.id = 'new-project';
 
-    const defaultProjectSide = document.createElement('h3');
-    defaultProjectSide.innerHTML = 'Default project';
 
     sidebar.appendChild(newProject);
-    sidebar.appendChild(defaultProjectSide);
     content.appendChild(sidebar);
 
     const defaultProject = document.createElement('div');
@@ -42,4 +49,4 @@ const renderPage = (() => {
     content.appendChild(defaultProject);
 })();
 
-export {renderPage};
+export {renderSidebar, renderPage};

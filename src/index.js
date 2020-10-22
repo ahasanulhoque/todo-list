@@ -1,4 +1,4 @@
-import {renderPage} from './render-page.js'
+import {renderSidebar, renderPage} from './render-page.js'
 import {Project} from './project-logic.js'
 import {toDo} from './todo-logic.js';
 import {showProjectForm, renderProject} from './render-project.js'
@@ -6,7 +6,10 @@ import {showToDoForm, removeToDoForm, renderToDo} from './render-todo.js'
 
 const PageController = (() => {
     const content = document.querySelector('#content');
-    const defaultProject = Project('default');
+    const defaultProject = Project('Default project');
+
+    //Add default project to sidebar
+    renderSidebar(defaultProject.name);
 
     let projectsList = []; //All project objects will go in this array
     projectsList.push(defaultProject);
@@ -42,7 +45,10 @@ const PageController = (() => {
                         console.log(projectsList);
 
                         //Render new project on page
-                        renderProject(content, newProject.name);
+                        //renderProject(content, newProject.name);
+
+                        //Add new project to sidebar
+                        renderSidebar(newProject.name)
                     }
                 }
             }
