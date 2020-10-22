@@ -86,16 +86,19 @@ const PageController = (() => {
     }
 })();
 
-//10/16/20: Next, logic to create projects
 //10/19/20: Have default project working. Need to be able to make projects
 //          allow user to choose which to add to
 
 //Change todo.priority from integer to string (high, medium, low)?
 
-//Each project will be an array
 //When a new ToDo is created, it will be added to project array
 //Iterate over project array and use ToDo.priority to determine where
 //to push ToDo into project array
 
 //Use data-index for arrays and submit buttons?
-//Or only have submit button for shown project/array
+
+//10/22/20: Procedure for choosing right project add todo to:
+//Show list of all projects in sidebar: should show project name and todo names
+//Click on a project to show it on main page
+//Project on main page will have add todo form. This form should reference index
+//in projects array for the selected project
