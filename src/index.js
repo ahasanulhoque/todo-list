@@ -84,16 +84,14 @@ const PageController = (() => {
                                             form.elements.namedItem('date').value,
                                             form.elements.namedItem('priority').value);
                         
-                        //Push to projects array and console.log to test if
-                        //it's working
+                        //Push to projects todos array by finding the correct project using the displayed
+                        //project's data-index
                         let selectedProjectDOM = document.querySelector('#project-full');
                         projectsList[selectedProjectDOM.dataset.index].todos.push(newToDo);
-                        console.log(projectsList[selectedProjectDOM.dataset.index]);
 
-                       projectsList[selectedProjectDOM.dataset.index].todos.forEach((todo) => {
-                            renderToDo(selectedProjectDOM, todo.title, todo.description, todo.dueDate,
-                                        todo.priority);
-                        });
+                        //Render new todo on page
+                        renderToDo(selectedProjectDOM, newToDo.title, newToDo.description, newToDo.dueDate,
+                                        newToDo.priority);
 
                         //Next: render todo on page
                         //renderToDo(currentProject, newToDo.title, newToDo.description,
