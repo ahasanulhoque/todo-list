@@ -1,4 +1,4 @@
-import {renderSidebar, renderPage} from './render-page.js'
+import {renderSidebar, renderMain, renderPage} from './render-page.js'
 import {Project} from './project-logic.js'
 import {toDo} from './todo-logic.js';
 import {showProjectForm, renderProject} from './render-project.js'
@@ -6,15 +6,28 @@ import {showToDoForm, removeToDoForm, renderToDo} from './render-todo.js'
 
 const PageController = (() => {
     const content = document.querySelector('#content');
+    const sidebar = document.querySelector('#sidebar');
     const defaultProject = Project('Default project');
-
-    //Add default project to sidebar
-    renderSidebar(defaultProject.name);
 
     let projectsList = []; //All project objects will go in this array
     projectsList.push(defaultProject);
     let projectCount = 0; //This variable will be used to store
                           //arrays in projectsList at index
+
+    //Add default project to sidebar
+    renderSidebar(defaultProject.name, projectsList.indexOf(defaultProject));
+
+    //Show default project in main view
+    renderMain(content, defaultProject.name);
+
+    //Listen for clicks on projects in sidebar.
+    sidebar.onclick = function(e){
+        let click = e.target;
+        if (click.hasAttribute('data-index')){
+            //Render the project fully in the main view
+            renderMain(content, projectsList[click.dataset.index].name);
+        }
+    }
 
     content.onclick = function(e){
         //Listen for creation of new projects or new todos
@@ -48,7 +61,7 @@ const PageController = (() => {
                         //renderProject(content, newProject.name);
 
                         //Add new project to sidebar
-                        renderSidebar(newProject.name)
+                        renderSidebar(newProject.name, projectsList.indexOf(newProject));
                     }
                 }
             }
