@@ -80,6 +80,8 @@ const renderToDo = (projectDOM, title, description, dueDate, priority) => {
     //rather than the variables used in the app's logic
 
     //This function will also need buttons to set as complete or delete
+
+    const newToDoButton = document.querySelector('#new-to-do');
     
     const toDoDOM = document.createElement('div');
     toDoDOM.classList.add('to-do');
@@ -101,7 +103,7 @@ const renderToDo = (projectDOM, title, description, dueDate, priority) => {
     priorityDOM.innerHTML = priority;
     toDoDOM.appendChild(priorityDOM);
 
-    projectDOM.appendChild(toDoDOM);
+    projectDOM.insertBefore(toDoDOM, newToDoButton);
 }
 
 export {showToDoForm, removeToDoForm, renderToDo};

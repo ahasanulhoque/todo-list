@@ -16,7 +16,7 @@ const renderSidebar = (projectName, index) => {
     sidebar.appendChild(projectSide);
 }
 
-const renderMain = (content, projectTitle, toDos) => {
+const renderMain = (content, projectTitle, index) => {
     //render the main part for each project
 
     //Remove whichever project is already shown
@@ -27,6 +27,7 @@ const renderMain = (content, projectTitle, toDos) => {
 
     const projectMainDOM = document.createElement('div');
     projectMainDOM.id = 'project-full';
+    projectMainDOM.dataset.index = index;
 
     const projectTitleDOM = document.createElement('h2');
     const newToDo = document.createElement('button');
@@ -34,7 +35,7 @@ const renderMain = (content, projectTitle, toDos) => {
     projectTitleDOM.innerHTML = projectTitle;
 
     newToDo.innerHTML = 'New ToDo';
-    newToDo.classList.add('new-to-do');
+    newToDo.id = 'new-to-do';
 
     projectMainDOM.appendChild(projectTitleDOM);
     projectMainDOM.appendChild(newToDo);

@@ -18,22 +18,15 @@ const PageController = (() => {
     renderSidebar(defaultProject.name, projectsList.indexOf(defaultProject));
 
     //Show default project in main view
-    renderMain(content, defaultProject.name);
+    renderMain(content, defaultProject.name, projectsList.indexOf(defaultProject));
 
-    //Listen for clicks on projects in sidebar.
+    //Listen for clicks on projects in sidebar, or New Project button to create a project
     sidebar.onclick = function(e){
         let click = e.target;
         if (click.hasAttribute('data-index')){
-            //Render the project fully in the main view
-            renderMain(content, projectsList[click.dataset.index].name);
-        }
-    }
-
-    content.onclick = function(e){
-        //Listen for creation of new projects or new todos
-        let button = e.target;
-
-        if (button.id == 'new-project'){
+            //Render the clicked project fully in the main view
+            renderMain(content, projectsList[click.dataset.index].name, click.dataset.index);
+        } else if (click.id == 'new-project'){
 
             //allow user to create a project
             //Call a function to show a form to create a new project
@@ -57,16 +50,20 @@ const PageController = (() => {
                         projectsList.push(newProject);
                         console.log(projectsList);
 
-                        //Render new project on page
-                        //renderProject(content, newProject.name);
-
                         //Add new project to sidebar
                         renderSidebar(newProject.name, projectsList.indexOf(newProject));
                     }
                 }
             }
 
-        } else if (button.className == 'new-to-do'){
+        }
+    }
+
+    content.onclick = function(e){
+        //Listen for creation of new todos
+        let button = e.target;
+
+        if (button.id == 'new-to-do'){
             //Call a form function from a render module
             showToDoForm(content);
 
@@ -86,18 +83,21 @@ const PageController = (() => {
                                             form.elements.namedItem('description').value,
                                             form.elements.namedItem('date').value,
                                             form.elements.namedItem('priority').value);
-                        console.log(newToDo); //Test if working
                         
                         //Push to projects array and console.log to test if
                         //it's working
-                        defaultProject.todos.push(newToDo);
-                        console.log(defaultProject);
+                        let selectedProjectDOM = document.querySelector('#project-full');
+                        projectsList[selectedProjectDOM.dataset.index].todos.push(newToDo);
+                        console.log(projectsList[selectedProjectDOM.dataset.index]);
+
+                       projectsList[selectedProjectDOM.dataset.index].todos.forEach((todo) => {
+                            renderToDo(selectedProjectDOM, todo.title, todo.description, todo.dueDate,
+                                        todo.priority);
+                        });
 
                         //Next: render todo on page
-                        //currentProject needs to be updated to select correct project
-                        const currentProject = document.querySelector('#content div');
-                        renderToDo(currentProject, newToDo.title, newToDo.description,
-                                    newToDo.dueDate, newToDo.priority);
+                        //renderToDo(currentProject, newToDo.title, newToDo.description,
+                        //            newToDo.dueDate, newToDo.priority);
                     }
                 }
             }
