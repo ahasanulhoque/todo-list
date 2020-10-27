@@ -4,7 +4,7 @@ const renderSidebar = (projectName, index) => {
 
     const sidebar = document.querySelector('#sidebar');
 
-    const projectSide = document.createElement('div');  //The sidebar instance of the whole project
+    const projectSide = document.createElement('section');  //The sidebar instance of the whole project
     projectSide.dataset.index = index;
     projectSide.classList.add('project-sidebar');
 
@@ -16,31 +16,67 @@ const renderSidebar = (projectName, index) => {
     sidebar.appendChild(projectSide);
 }
 
-const renderMain = (content, projectTitle, index) => {
+const renderMain = (content, projectTitle, index, toDosArray) => {
     //render the main part for each project
 
-    //Remove whichever project is already shown
+
+    //Optonally render arrays on click
+
+    //The full view of the project will be a section with id='project-full'
+    //If this section already exists (project is already in full view), remove it:
     if(document.querySelector('#project-full')){
         content.removeChild(document.querySelector('#project-full'));
     }
     
 
-    const projectMainDOM = document.createElement('div');
+    const projectMainDOM = document.createElement('section');
     projectMainDOM.id = 'project-full';
-    projectMainDOM.dataset.index = index;
+    projectMainDOM.dataset.index = index;                   //Give the div a data-index that is
+                                                            //equal to the project's index in the
+                                                            //project array
 
     const projectTitleDOM = document.createElement('h2');
-    const newToDo = document.createElement('button');
-
     projectTitleDOM.innerHTML = projectTitle;
-
-    newToDo.innerHTML = 'New ToDo';
-    newToDo.id = 'new-to-do';
-
     projectMainDOM.appendChild(projectTitleDOM);
-    projectMainDOM.appendChild(newToDo);
 
     
+
+    if(toDosArray){
+        //If there are already toDos in the project, they will be children of the below section:
+        const toDosDOM = document.createElement('section');
+
+        toDosArray.forEach((toDo) => {
+            //Render each toDo in the array passed to the renderMain function:
+            const toDoDOM = document.createElement('section');
+            toDoDOM.classList.add('to-do');
+
+            const titleDOM = document.createElement('h3');
+            titleDOM.innerHTML = toDo.title;
+            toDoDOM.appendChild(titleDOM);
+
+            const descriptionDOM = document.createElement('p');
+            descriptionDOM.innerHTML = toDo.description;
+            toDoDOM.appendChild(descriptionDOM);
+
+            const dueDateDOM = document.createElement('p');
+            dueDateDOM.innerHTML = toDo.dueDate;
+            toDoDOM.appendChild(dueDateDOM);
+
+            //May need to take priorityDOM out if it is not displayed on page
+            const priorityDOM = document.createElement('p');
+            priorityDOM.innerHTML = toDo.priority;
+            toDoDOM.appendChild(priorityDOM);
+
+            toDosDOM.appendChild(toDoDOM);
+        });
+        projectMainDOM.appendChild(toDosDOM);
+    }
+
+    const newToDo = document.createElement('button');
+    newToDo.innerHTML = 'New ToDo';
+    newToDo.id = 'new-to-do';
+    projectMainDOM.appendChild(newToDo);
+   
     content.appendChild(projectMainDOM);
 }
 
@@ -49,7 +85,7 @@ const renderMain = (content, projectTitle, index) => {
 const renderPage = (() => {
     const content = document.querySelector('#content');
 
-    const sidebar = document.createElement('div');
+    const sidebar = document.createElement('section');
     sidebar.id = 'sidebar';
 
     const sidebarTitle = document.createElement('h2');

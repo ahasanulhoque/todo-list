@@ -25,7 +25,8 @@ const PageController = (() => {
         let click = e.target;
         if (click.hasAttribute('data-index')){
             //Render the clicked project fully in the main view
-            renderMain(content, projectsList[click.dataset.index].name, click.dataset.index);
+            renderMain(content, projectsList[click.dataset.index].name, click.dataset.index, 
+                        projectsList[click.dataset.index].todos);
         } else if (click.id == 'new-project'){
 
             //allow user to create a project
@@ -103,16 +104,11 @@ const PageController = (() => {
     }
 })();
 
-//10/19/20: Have default project working. Need to be able to make projects
-//          allow user to choose which to add to
-
 //Change todo.priority from integer to string (high, medium, low)?
 
 //When a new ToDo is created, it will be added to project array
 //Iterate over project array and use ToDo.priority to determine where
 //to push ToDo into project array
-
-//Use data-index for arrays and submit buttons?
 
 //10/22/20: Procedure for choosing right project add todo to:
 //Show list of all projects in sidebar: should show project name and todo names

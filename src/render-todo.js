@@ -83,7 +83,7 @@ const renderToDo = (projectDOM, title, description, dueDate, priority) => {
 
     const newToDoButton = document.querySelector('#new-to-do');
     
-    const toDoDOM = document.createElement('div');
+    const toDoDOM = document.createElement('section');
     toDoDOM.classList.add('to-do');
 
     const titleDOM = document.createElement('h3');
