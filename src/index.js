@@ -27,6 +27,10 @@ const PageController = (() => {
             //Render the clicked project fully in the main view
             renderMain(content, projectsList[click.dataset.index].name, click.dataset.index, 
                         projectsList[click.dataset.index].todos);
+            projectsList[click.dataset.index].todos.forEach((todo) => {
+                renderToDo(document.querySelector('#todos-list'), todo.title, todo.description,
+                            todo.dueDate, todo.priority);
+            });
         } else if (click.id == 'new-project'){
 
             //allow user to create a project
@@ -91,7 +95,7 @@ const PageController = (() => {
                         projectsList[selectedProjectDOM.dataset.index].todos.push(newToDo);
 
                         //Render new todo on page
-                        renderToDo(selectedProjectDOM, newToDo.title, newToDo.description, newToDo.dueDate,
+                        renderToDo(document.querySelector('#todos-list'), newToDo.title, newToDo.description, newToDo.dueDate,
                                         newToDo.priority);
 
                         //Next: render todo on page

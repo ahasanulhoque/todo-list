@@ -16,11 +16,12 @@ const renderSidebar = (projectName, index) => {
     sidebar.appendChild(projectSide);
 }
 
-const renderMain = (content, projectTitle, index, toDosArray) => {
-    //render the main part for each project
+const renderSidebarTodos = () => {
+    //This funciton will update the sidebar when a new todo is created
+}
 
-
-    //Optonally render arrays on click
+const renderMain = (content, projectTitle, index) => {
+    //This function renders the project in full on the page
 
     //The full view of the project will be a section with id='project-full'
     //If this section already exists (project is already in full view), remove it:
@@ -38,9 +39,12 @@ const renderMain = (content, projectTitle, index, toDosArray) => {
     const projectTitleDOM = document.createElement('h2');
     projectTitleDOM.innerHTML = projectTitle;
     projectMainDOM.appendChild(projectTitleDOM);
-
     
+    const toDosDOM = document.createElement('secton');
+    toDosDOM.id = 'todos-list';
+    projectMainDOM.appendChild(toDosDOM);
 
+    /* Removing this to make objects more loosely coupled
     if(toDosArray){
         //If there are already toDos in the project, they will be children of the below section:
         const toDosDOM = document.createElement('section');
@@ -70,7 +74,7 @@ const renderMain = (content, projectTitle, index, toDosArray) => {
             toDosDOM.appendChild(toDoDOM);
         });
         projectMainDOM.appendChild(toDosDOM);
-    }
+    }*/
 
     const newToDo = document.createElement('button');
     newToDo.innerHTML = 'New ToDo';

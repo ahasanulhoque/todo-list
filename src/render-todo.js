@@ -75,14 +75,12 @@ const removeToDoForm = (content, form) => {
 }
 
 //Function to render todo on page
-const renderToDo = (projectDOM, title, description, dueDate, priority) => {
+const renderToDo = (toDosDOM, title, description, dueDate, priority) => {
     //variableDOM convention used to indicate that these are elements rendered in DOM tree,
     //rather than the variables used in the app's logic
 
     //This function will also need buttons to set as complete or delete
 
-    const newToDoButton = document.querySelector('#new-to-do');
-    
     const toDoDOM = document.createElement('section');
     toDoDOM.classList.add('to-do');
 
@@ -103,7 +101,7 @@ const renderToDo = (projectDOM, title, description, dueDate, priority) => {
     priorityDOM.innerHTML = priority;
     toDoDOM.appendChild(priorityDOM);
 
-    projectDOM.insertBefore(toDoDOM, newToDoButton);
+    toDosDOM.appendChild(toDoDOM);
 }
 
 export {showToDoForm, removeToDoForm, renderToDo};
