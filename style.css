@@ -2,6 +2,18 @@
     display: flex;
 }
 
+#sidebar {
+    height: 100vh;
+    width: 10vw;
+    border-right: solid;
+    padding: 1rem;
+}
+
+#project-full {
+    padding: 1rem;
+    width: 90vw;
+}
+
 #project-form {
     z-index: 1;
     display: flex;
