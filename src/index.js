@@ -1,4 +1,4 @@
-import {renderSidebar, renderMain, renderPage} from './render-page.js'
+import {renderSidebar, renderSidebarTodos, renderMain, renderPage} from './render-page.js'
 import {Project} from './project-logic.js'
 import {toDo} from './todo-logic.js';
 import {showProjectForm, renderProject} from './render-project.js'
@@ -98,6 +98,11 @@ const PageController = (() => {
                         renderToDo(document.querySelector('#todos-list'), newToDo.title, newToDo.description, newToDo.dueDate,
                                         newToDo.priority);
 
+                        //Update the sidebar with the new todo
+                        renderSidebarTodos(document.querySelector('#sidebar').querySelector(`[data-index="${selectedProjectDOM.dataset.index}"]`).querySelector('.todos-sidebar'),
+                                            newToDo.title, newToDo.dueDate)
+                        
+                        
                         //Next: render todo on page
                         //renderToDo(currentProject, newToDo.title, newToDo.description,
                         //            newToDo.dueDate, newToDo.priority);
@@ -113,9 +118,3 @@ const PageController = (() => {
 //When a new ToDo is created, it will be added to project array
 //Iterate over project array and use ToDo.priority to determine where
 //to push ToDo into project array
-
-//10/22/20: Procedure for choosing right project add todo to:
-//Show list of all projects in sidebar: should show project name and todo names
-//Click on a project to show it on main page
-//Project on main page will have add todo form. This form should reference index
-//in projects array for the selected project

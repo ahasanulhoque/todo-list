@@ -12,12 +12,29 @@ const renderSidebar = (projectName, index) => {
     projectSideName.dataset.index = index;
     projectSideName.innerHTML = projectName;
 
+    //The below element will contain the list of the project's todos
+    const todosList = document.createElement('secton');
+    todosList.classList.add('todos-sidebar');
+
     projectSide.appendChild(projectSideName);
+    projectSide.appendChild(todosList);
     sidebar.appendChild(projectSide);
 }
 
-const renderSidebarTodos = () => {
+const renderSidebarTodos = (todosList, todoTitle, todoDueDate) => {
     //This funciton will update the sidebar when a new todo is created
+
+    let todoSidebar = document.createElement('section');
+    let todoTitleDOM = document.createElement('p');
+    let todoDueDateDOM = document.createElement('p');
+
+    todoTitleDOM.innerHTML = todoTitle;
+    todoDueDateDOM.innerHTML = todoDueDate;
+
+    todoSidebar.appendChild(todoTitleDOM);
+    todoSidebar.appendChild(todoDueDateDOM);
+
+    todosList.appendChild(todoSidebar);
 }
 
 const renderMain = (content, projectTitle, index) => {
@@ -121,4 +138,4 @@ const renderPage = (() => {
     */
 })();
 
-export {renderSidebar, renderMain, renderPage};
+export {renderSidebar, renderSidebarTodos, renderMain, renderPage};
