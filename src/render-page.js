@@ -24,9 +24,11 @@ const renderSidebar = (projectName, index) => {
 const renderSidebarTodos = (todosList, todoTitle, todoDueDate) => {
     //This funciton will update the sidebar when a new todo is created
 
-    let todoSidebar = document.createElement('section');
-    let todoTitleDOM = document.createElement('p');
-    let todoDueDateDOM = document.createElement('p');
+    const todoSidebar = document.createElement('section');
+    todoSidebar.classList.add('todo-sidebar');
+
+    const todoTitleDOM = document.createElement('p');
+    const todoDueDateDOM = document.createElement('p');
 
     todoTitleDOM.innerHTML = todoTitle;
     todoDueDateDOM.innerHTML = todoDueDate;

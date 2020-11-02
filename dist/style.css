@@ -9,6 +9,10 @@
     padding: 1rem;
 }
 
+.todo-sidebar {
+    display: flex;
+}
+
 #project-full {
     padding: 1rem;
     width: 90vw;
