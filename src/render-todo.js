@@ -75,7 +75,7 @@ const removeToDoForm = (content, form) => {
 }
 
 //Function to render todo on page
-const renderToDo = (toDosDOM, title, description, dueDate, priority) => {
+const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex) => {
     //variableDOM convention used to indicate that these are elements rendered in DOM tree,
     //rather than the variables used in the app's logic
 
@@ -83,6 +83,7 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority) => {
 
     const toDoDOM = document.createElement('section');
     toDoDOM.classList.add('to-do');
+    toDoDOM.dataset.index = todoIndex;
 
     const titleDOM = document.createElement('h3');
     titleDOM.innerHTML = title;
@@ -100,6 +101,12 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority) => {
     const priorityDOM = document.createElement('p');
     priorityDOM.innerHTML = priority;
     toDoDOM.appendChild(priorityDOM);
+
+    //Delte todo button
+    const deleteToDo = document.createElement('button');
+    deleteToDo.classList.add('delete-todo');
+    deleteToDo.innerHTML = 'Delete'
+    toDoDOM.appendChild(deleteToDo);
 
     toDosDOM.appendChild(toDoDOM);
 }

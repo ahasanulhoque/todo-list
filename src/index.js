@@ -29,7 +29,7 @@ const PageController = (() => {
                         projectsList[click.dataset.index].todos);
             projectsList[click.dataset.index].todos.forEach((todo) => {
                 renderToDo(document.querySelector('#todos-list'), todo.title, todo.description,
-                            todo.dueDate, todo.priority);
+                            todo.dueDate, todo.priority, projectsList[click.dataset.index].todos.indexOf(todo));
             });
         } else if (click.id == 'new-project'){
 
@@ -96,7 +96,7 @@ const PageController = (() => {
 
                         //Render new todo on page
                         renderToDo(document.querySelector('#todos-list'), newToDo.title, newToDo.description, newToDo.dueDate,
-                                        newToDo.priority);
+                                        newToDo.priority, projectsList[selectedProjectDOM.dataset.index].todos.indexOf(newToDo));
 
                         //Update the sidebar with the new todo
                         renderSidebarTodos(document.querySelector('#sidebar').querySelector(`[data-index="${selectedProjectDOM.dataset.index}"]`).querySelector('.todos-sidebar'),
