@@ -105,6 +105,7 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex) 
     //Delte todo button
     const deleteToDo = document.createElement('button');
     deleteToDo.classList.add('delete-todo');
+    deleteToDo.dataset.index = todoIndex;
     deleteToDo.innerHTML = 'Delete'
     toDoDOM.appendChild(deleteToDo);
 

@@ -25,8 +25,7 @@ const PageController = (() => {
         let click = e.target;
         if (click.hasAttribute('data-index')){
             //Render the clicked project fully in the main view
-            renderMain(content, projectsList[click.dataset.index].name, click.dataset.index, 
-                        projectsList[click.dataset.index].todos);
+            renderMain(content, projectsList[click.dataset.index].name, click.dataset.index);
             projectsList[click.dataset.index].todos.forEach((todo) => {
                 renderToDo(document.querySelector('#todos-list'), todo.title, todo.description,
                             todo.dueDate, todo.priority, projectsList[click.dataset.index].todos.indexOf(todo));
@@ -65,7 +64,7 @@ const PageController = (() => {
     }
 
     content.onclick = function(e){
-        //Listen for creation of new todos
+        //Listen for creation of new todos or deletion of existing todos
         let button = e.target;
 
         if (button.id == 'new-to-do'){
@@ -109,6 +108,23 @@ const PageController = (() => {
                     }
                 }
             }
+        } else if(button.getAttribute('class') == 'delete-todo'){
+            //Button to delete todos
+
+            //First, remove the deleted todo from its project's todos array
+            let projectIndex = document.querySelector('#project-full').getAttribute('data-index');
+            let todoIndex = button.getAttribute('data-index');
+            projectsList[projectIndex].deleteToDo(projectsList[projectIndex].todos, todoIndex);
+            console.log(projectsList[projectIndex]);
+
+            //Next, remove the deleted todo from the page.
+            //Will need to render all todos again since data-indices need to be changed
+            document.querySelector('#todos-list').querySelectorAll('*').forEach(n => n.remove());
+
+            projectsList[projectIndex].todos.forEach((todo) => {
+                renderToDo(document.querySelector('#todos-list'), todo.title, todo.description,
+                            todo.dueDate, todo.priority, projectsList[projectIndex].todos.indexOf(todo));
+            });
         }
     }
 })();
