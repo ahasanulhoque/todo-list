@@ -29,3 +29,7 @@
     border: solid;
     
 }
+
+.todo-details-hidden {
+    display: none;
+}

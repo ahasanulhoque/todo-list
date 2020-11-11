@@ -2,7 +2,7 @@ import {renderSidebar, renderSidebarTodos, renderMain, renderPage} from './rende
 import {Project} from './project-logic.js'
 import {toDo, toggleStatus} from './todo-logic.js';
 import {showProjectForm, renderProject} from './render-project.js'
-import {showToDoForm, removeToDoForm, renderToDo} from './render-todo.js'
+import {showToDoForm, removeToDoForm, renderToDo, expandToDo} from './render-todo.js'
 
 const PageController = (() => {
     const content = document.querySelector('#content');
@@ -110,7 +110,7 @@ const PageController = (() => {
                 }
             }
         } else if(button.getAttribute('class') == 'expand-todo'){
-            alert('expand');
+            expandToDo(document.querySelector('#todos-list').querySelector(`[data-index="${button.getAttribute('data-index')}"]`).querySelector('.todo-details'));
         } else if(button.getAttribute('class') == 'edit-todo'){
             alert('edit');
         } else if(button.getAttribute('class') == 'check-todo'){
@@ -140,6 +140,10 @@ const PageController = (() => {
 
 //Change todo.priority from integer to string (high, medium, low)?
 
-//When a new ToDo is created, it will be added to project array
-//Iterate over project array and use ToDo.priority to determine where
-//to push ToDo into project array
+/*
+11/10/20 NOTES:
+STILL NEED TO ADD:
+EDIT FUNCITONALITY
+LOCALSTORAGE
+DATE-FNS
+*/

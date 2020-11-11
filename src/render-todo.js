@@ -100,47 +100,60 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex) 
     const todoButtons = document.createElement('div');
     todoButtons.classList.add('todo-buttons');
 
-    const expandToDo = document.createElement('button');
-    expandToDo.classList.add('expand-todo');
-    expandToDo.setAttribute('title', 'Expand Todo');
-    expandToDo.dataset.index = todoIndex;
-    expandToDo.innerHTML = '+';
-    todoButtons.appendChild(expandToDo);
+    const expandButton = document.createElement('button');
+    expandButton.classList.add('expand-todo');
+    expandButton.setAttribute('title', 'Expand Todo');
+    expandButton.dataset.index = todoIndex;
+    expandButton.innerHTML = '+';
+    todoButtons.appendChild(expandButton);
 
-    const editToDo = document.createElement('button');
-    editToDo.classList.add('edit-todo');
-    editToDo.setAttribute('title', 'Edit Todo');
-    editToDo.dataset.index = todoIndex;
-    editToDo.innerHTML = '\u270e';
-    todoButtons.appendChild(editToDo);
+    const editButton = document.createElement('button');
+    editButton.classList.add('edit-todo');
+    editButton.setAttribute('title', 'Edit Todo');
+    editButton.dataset.index = todoIndex;
+    editButton.innerHTML = '\u270e';
+    todoButtons.appendChild(editButton);
 
-    const checkToDo = document.createElement('button');
-    checkToDo.classList.add('check-todo');
-    checkToDo.setAttribute('title', 'Change Todo Status');
-    checkToDo.dataset.index = todoIndex;
-    checkToDo.innerHTML = '\u2713';
-    todoButtons.appendChild(checkToDo);
+    const checkButton = document.createElement('button');
+    checkButton.classList.add('check-todo');
+    checkButton.setAttribute('title', 'Change Todo Status');
+    checkButton.dataset.index = todoIndex;
+    checkButton.innerHTML = '\u2713';
+    todoButtons.appendChild(checkButton);
 
-    const deleteToDo = document.createElement('button');
-    deleteToDo.classList.add('delete-todo');
-    deleteToDo.setAttribute('title', 'Delete Todo');
-    deleteToDo.dataset.index = todoIndex;
-    deleteToDo.innerHTML = 'X'
-    todoButtons.appendChild(deleteToDo)
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete-todo');
+    deleteButton.setAttribute('title', 'Delete Todo');
+    deleteButton.dataset.index = todoIndex;
+    deleteButton.innerHTML = 'X'
+    todoButtons.appendChild(deleteButton)
 
     todoTopRow.appendChild(todoButtons);
     toDoDOM.appendChild(todoTopRow);
 
+    const todoDetails = document.createElement('div');
+    todoDetails.classList.add('todo-details');
+    todoDetails.classList.add('todo-details-hidden');
+
     const descriptionDOM = document.createElement('p');
     descriptionDOM.innerHTML = description;
-    toDoDOM.appendChild(descriptionDOM);
+    todoDetails.appendChild(descriptionDOM);
 
     //May need to take priorityDOM out if it is not displayed on page
     const priorityDOM = document.createElement('p');
     priorityDOM.innerHTML = priority;
-    toDoDOM.appendChild(priorityDOM);
+    todoDetails.appendChild(priorityDOM);
+
+    toDoDOM.appendChild(todoDetails);
 
     toDosDOM.appendChild(toDoDOM);
 }
 
-export {showToDoForm, removeToDoForm, renderToDo};
+const expandToDo = (detailsDOM) => {
+    //Change expand button to opposite
+    //toggle class
+    
+    detailsDOM.classList.toggle('todo-details-hidden');
+}
+
+export {showToDoForm, removeToDoForm, renderToDo, expandToDo};
