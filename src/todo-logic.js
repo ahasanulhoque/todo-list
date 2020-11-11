@@ -1,13 +1,16 @@
 const toDo = (title, description, dueDate, priority) => {
-    let completed = false;
+    let status = false;
 
-    const toggleStatus = () => {
-        completed = !completed;
-    }
+    /*const toggleStatus = () => {
+        status = !status;
+    }*/
 
-    return {title, description, dueDate, priority, completed, toggleStatus}
+    return {title, description, dueDate, priority, status}
 };
 
+const toggleStatus = (status) => {
+    status = !status;
+}
 
 
-export {toDo};
+export {toDo, toggleStatus};

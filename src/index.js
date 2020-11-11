@@ -1,6 +1,6 @@
 import {renderSidebar, renderSidebarTodos, renderMain, renderPage} from './render-page.js'
 import {Project} from './project-logic.js'
-import {toDo} from './todo-logic.js';
+import {toDo, toggleStatus} from './todo-logic.js';
 import {showProjectForm, renderProject} from './render-project.js'
 import {showToDoForm, removeToDoForm, renderToDo} from './render-todo.js'
 
@@ -67,6 +67,9 @@ const PageController = (() => {
         //Listen for creation of new todos or deletion of existing todos
         let button = e.target;
 
+        //Location of the selected project in the projects array, used in several of below if statements
+        let projectIndex = document.querySelector('#project-full').getAttribute('data-index');
+
         if (button.id == 'new-to-do'){
             //Call a form function from a render module
             showToDoForm(content);
@@ -102,17 +105,23 @@ const PageController = (() => {
                                             newToDo.title, newToDo.dueDate)
                         
                         
-                        //Next: render todo on page
-                        //renderToDo(currentProject, newToDo.title, newToDo.description,
-                        //            newToDo.dueDate, newToDo.priority);
+                        console.log(newToDo);
                     }
                 }
             }
+        } else if(button.getAttribute('class') == 'expand-todo'){
+            alert('expand');
+        } else if(button.getAttribute('class') == 'edit-todo'){
+            alert('edit');
+        } else if(button.getAttribute('class') == 'check-todo'){
+            //projectsList[projectIndex].todos[button.getAttribute('data-index')].toggleStatus();
+            toggleStatus(projectsList[projectIndex].todos[button.getAttribute('data-index')].status);
+            console.log(projectsList[projectIndex].todos[button.getAttribute('data-index')]);
         } else if(button.getAttribute('class') == 'delete-todo'){
             //Button to delete todos
 
             //First, remove the deleted todo from its project's todos array
-            let projectIndex = document.querySelector('#project-full').getAttribute('data-index');
+            
             let todoIndex = button.getAttribute('data-index');
             projectsList[projectIndex].deleteToDo(projectsList[projectIndex].todos, todoIndex);
             console.log(projectsList[projectIndex]);
@@ -123,7 +132,7 @@ const PageController = (() => {
 
             projectsList[projectIndex].todos.forEach((todo) => {
                 renderToDo(document.querySelector('#todos-list'), todo.title, todo.description,
-                            todo.dueDate, todo.priority, projectsList[projectIndex].todos.indexOf(todo));
+                            todo.dueDate, todo.priority, projectsList[projectIndex].todos.indexOf(todo));            
             });
         }
     }

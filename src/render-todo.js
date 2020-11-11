@@ -82,32 +82,63 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex) 
     //This function will also need buttons to set as complete or delete
 
     const toDoDOM = document.createElement('section');
-    toDoDOM.classList.add('to-do');
+    toDoDOM.classList.add('todo');
     toDoDOM.dataset.index = todoIndex;
+
+    const todoTopRow = document.createElement('div');
+    todoTopRow.classList.add('todo-top-row');
 
     const titleDOM = document.createElement('h3');
     titleDOM.innerHTML = title;
-    toDoDOM.appendChild(titleDOM);
+    todoTopRow.appendChild(titleDOM);
+
+    const dueDateDOM = document.createElement('p');
+    dueDateDOM.innerHTML = dueDate;
+    todoTopRow.appendChild(dueDateDOM);
+
+    //Section for buttons
+    const todoButtons = document.createElement('div');
+    todoButtons.classList.add('todo-buttons');
+
+    const expandToDo = document.createElement('button');
+    expandToDo.classList.add('expand-todo');
+    expandToDo.setAttribute('title', 'Expand Todo');
+    expandToDo.dataset.index = todoIndex;
+    expandToDo.innerHTML = '+';
+    todoButtons.appendChild(expandToDo);
+
+    const editToDo = document.createElement('button');
+    editToDo.classList.add('edit-todo');
+    editToDo.setAttribute('title', 'Edit Todo');
+    editToDo.dataset.index = todoIndex;
+    editToDo.innerHTML = '\u270e';
+    todoButtons.appendChild(editToDo);
+
+    const checkToDo = document.createElement('button');
+    checkToDo.classList.add('check-todo');
+    checkToDo.setAttribute('title', 'Change Todo Status');
+    checkToDo.dataset.index = todoIndex;
+    checkToDo.innerHTML = '\u2713';
+    todoButtons.appendChild(checkToDo);
+
+    const deleteToDo = document.createElement('button');
+    deleteToDo.classList.add('delete-todo');
+    deleteToDo.setAttribute('title', 'Delete Todo');
+    deleteToDo.dataset.index = todoIndex;
+    deleteToDo.innerHTML = 'X'
+    todoButtons.appendChild(deleteToDo)
+
+    todoTopRow.appendChild(todoButtons);
+    toDoDOM.appendChild(todoTopRow);
 
     const descriptionDOM = document.createElement('p');
     descriptionDOM.innerHTML = description;
     toDoDOM.appendChild(descriptionDOM);
 
-    const dueDateDOM = document.createElement('p');
-    dueDateDOM.innerHTML = dueDate;
-    toDoDOM.appendChild(dueDateDOM);
-
     //May need to take priorityDOM out if it is not displayed on page
     const priorityDOM = document.createElement('p');
     priorityDOM.innerHTML = priority;
     toDoDOM.appendChild(priorityDOM);
-
-    //Delte todo button
-    const deleteToDo = document.createElement('button');
-    deleteToDo.classList.add('delete-todo');
-    deleteToDo.dataset.index = todoIndex;
-    deleteToDo.innerHTML = 'Delete'
-    toDoDOM.appendChild(deleteToDo);
 
     toDosDOM.appendChild(toDoDOM);
 }

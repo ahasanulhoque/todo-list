@@ -23,3 +23,9 @@
     display: flex;
     justify-content: center;
 }
+
+.todo-top-row {
+    display: flex;
+    border: solid;
+    
+}
