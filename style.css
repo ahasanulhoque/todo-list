@@ -33,3 +33,15 @@
 .todo-details-hidden {
     display: none;
 }
+
+.high-priority {
+    background-color: red;
+}
+
+.medium-priority {
+    background-color: yellow;
+}
+
+.low-priority {
+    background-color: green;
+}
