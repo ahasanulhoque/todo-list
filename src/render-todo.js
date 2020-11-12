@@ -42,17 +42,48 @@ const showToDoForm = (content) => {
     dateInput.setAttribute('placeholder', 'Due Date');
     newForm.appendChild(dateInput);
 
-    const priorityLabel = document.createElement('label');
-    priorityLabel.setAttribute('for', 'priority');
-    priorityLabel.innerHTML = 'ToDo priority';
-    newForm.appendChild(priorityLabel);
+    const priorityWrapper = document.createElement('div');
+    const priorityQuestion = document.createElement('p');
+    priorityQuestion.innerHTML = 'Todo priority:'
+    priorityWrapper.appendChild(priorityQuestion);
 
-    const priorityInput = document.createElement('input');
-    priorityInput.setAttribute('name', 'priority');
-    priorityInput.setAttribute('type', 'number');
-    priorityInput.setAttribute('min', '1');
-    priorityInput.setAttribute('placeholder', 'ToDo Priority');
-    newForm.appendChild(priorityInput);
+    const priorityInputLow = document.createElement('input');
+    priorityInputLow.id = 'low-priority';
+    priorityInputLow.setAttribute('name', 'priority');
+    priorityInputLow.setAttribute('type', 'radio');
+    priorityInputLow.setAttribute('value', 'Low priority');
+    priorityWrapper.appendChild(priorityInputLow)
+
+    const priorityLabelLow = document.createElement('label');
+    priorityLabelLow.setAttribute('for', 'low-priority');
+    priorityLabelLow.innerHTML = 'Low priority';
+    priorityWrapper.appendChild(priorityLabelLow);
+
+    const priorityInputMedium = document.createElement('input');
+    priorityInputMedium.id = 'medium-priority';
+    priorityInputMedium.setAttribute('name', 'priority');
+    priorityInputMedium.setAttribute('type', 'radio');
+    priorityInputMedium.setAttribute('value', 'Medium priority');
+    priorityWrapper.appendChild(priorityInputMedium)
+
+    const priorityLabelMedium = document.createElement('label');
+    priorityLabelMedium.setAttribute('for', 'medium-priority');
+    priorityLabelMedium.innerHTML = 'Medium priority';
+    priorityWrapper.appendChild(priorityLabelMedium);
+
+    const priorityInputHigh = document.createElement('input');
+    priorityInputHigh.id = 'high-priority';
+    priorityInputHigh.setAttribute('name', 'priority');
+    priorityInputHigh.setAttribute('type', 'radio');
+    priorityInputHigh.setAttribute('value', 'High priority');
+    priorityWrapper.appendChild(priorityInputHigh)
+
+    const priorityLabelHigh = document.createElement('label');
+    priorityLabelHigh.setAttribute('for', 'high-priority');
+    priorityLabelHigh.innerHTML = 'High priority';
+    priorityWrapper.appendChild(priorityLabelHigh);
+
+    newForm.appendChild(priorityWrapper);
 
     const submit = document.createElement('button');
     submit.setAttribute('type', 'button');
@@ -84,6 +115,14 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex) 
     const toDoDOM = document.createElement('section');
     toDoDOM.classList.add('todo');
     toDoDOM.dataset.index = todoIndex;
+
+    if (priority == 'Low priority'){
+        toDoDOM.classList.add('low-priority');
+    } else if(priority == 'Medium priority'){
+        toDoDOM.classList.add('medium-priority');
+    } else if(priority == 'High priority'){
+        toDoDOM.classList.add('high-priority');
+    }
 
     const todoTopRow = document.createElement('div');
     todoTopRow.classList.add('todo-top-row');
