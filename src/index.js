@@ -1,4 +1,4 @@
-import {renderSidebar, renderSidebarTodos, renderMain, renderPage} from './render-page.js'
+import {renderSidebar, renderMain, renderPage} from './render-page.js'
 import {Project} from './project-logic.js'
 import {toDo, toggleStatus} from './todo-logic.js';
 import {showProjectForm, renderProject} from './render-project.js'
@@ -99,10 +99,6 @@ const PageController = (() => {
                         //Render new todo on page
                         renderToDo(document.querySelector('#todos-list'), newToDo.title, newToDo.description, newToDo.dueDate,
                                         newToDo.priority, projectsList[selectedProjectDOM.dataset.index].todos.indexOf(newToDo));
-
-                        //Update the sidebar with the new todo
-                        renderSidebarTodos(document.querySelector('#sidebar').querySelector(`[data-index="${selectedProjectDOM.dataset.index}"]`).querySelector('.todos-sidebar'),
-                                            newToDo.title, newToDo.dueDate)
                         
                     }
                 }

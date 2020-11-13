@@ -21,24 +21,6 @@ const renderSidebar = (projectName, index) => {
     sidebar.appendChild(projectSide);
 }
 
-const renderSidebarTodos = (todosList, todoTitle, todoDueDate) => {
-    //This funciton will update the sidebar when a new todo is created
-
-    const todoSidebar = document.createElement('section');
-    todoSidebar.classList.add('todo-sidebar');
-
-    const todoTitleDOM = document.createElement('p');
-    const todoDueDateDOM = document.createElement('p');
-
-    todoTitleDOM.innerHTML = todoTitle;
-    todoDueDateDOM.innerHTML = todoDueDate;
-
-    todoSidebar.appendChild(todoTitleDOM);
-    todoSidebar.appendChild(todoDueDateDOM);
-
-    todosList.appendChild(todoSidebar);
-}
-
 const renderMain = (content, projectTitle, index) => {
     //This function renders the project in full on the page
 
