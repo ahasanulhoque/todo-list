@@ -132,13 +132,6 @@ const PageController = (() => {
                     }
                 }
             }
-
-            /*projectsList[projectIndex].todos[button.getAttribute('data-index')].title = form.elements.namedItem('todo-title').value;
-            projectsList[projectIndex].todos[button.getAttribute('data-index')].description = form.elements.namedItem('description').value;
-            projectsList[projectIndex].todos[button.getAttribute('data-index')].date = form.elements.namedItem('date').value;
-            projectsList[projectIndex].todos[button.getAttribute('data-index')].priority = form.elements.namedItem('priority').value;
-
-            console.log(projectsList[projectIndex].todos[button.getAttribute('data-index')]);*/
         } else if(button.getAttribute('class') == 'check-todo'){
             //projectsList[projectIndex].todos[button.getAttribute('data-index')].toggleStatus();
             toggleStatus(projectsList[projectIndex].todos[button.getAttribute('data-index')].status);

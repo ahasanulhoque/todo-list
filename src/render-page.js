@@ -45,38 +45,6 @@ const renderMain = (content, projectTitle, index) => {
     toDosDOM.id = 'todos-list';
     projectMainDOM.appendChild(toDosDOM);
 
-    /* Removing this to make objects more loosely coupled
-    if(toDosArray){
-        //If there are already toDos in the project, they will be children of the below section:
-        const toDosDOM = document.createElement('section');
-
-        toDosArray.forEach((toDo) => {
-            //Render each toDo in the array passed to the renderMain function:
-            const toDoDOM = document.createElement('section');
-            toDoDOM.classList.add('to-do');
-
-            const titleDOM = document.createElement('h3');
-            titleDOM.innerHTML = toDo.title;
-            toDoDOM.appendChild(titleDOM);
-
-            const descriptionDOM = document.createElement('p');
-            descriptionDOM.innerHTML = toDo.description;
-            toDoDOM.appendChild(descriptionDOM);
-
-            const dueDateDOM = document.createElement('p');
-            dueDateDOM.innerHTML = toDo.dueDate;
-            toDoDOM.appendChild(dueDateDOM);
-
-            //May need to take priorityDOM out if it is not displayed on page
-            const priorityDOM = document.createElement('p');
-            priorityDOM.innerHTML = toDo.priority;
-            toDoDOM.appendChild(priorityDOM);
-
-            toDosDOM.appendChild(toDoDOM);
-        });
-        projectMainDOM.appendChild(toDosDOM);
-    }*/
-
     const newToDo = document.createElement('button');
     newToDo.innerHTML = 'New ToDo';
     newToDo.id = 'new-to-do';
@@ -122,4 +90,4 @@ const renderPage = (() => {
     */
 })();
 
-export {renderSidebar, renderSidebarTodos, renderMain, renderPage};
+export {renderSidebar, renderMain, renderPage};

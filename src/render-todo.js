@@ -41,8 +41,8 @@ const showToDoForm = (content, action) => {
 
     const dateInput = document.createElement('input');
     dateInput.setAttribute('name', 'date');
-    dateInput.setAttribute('type', 'text');
-    dateInput.setAttribute('placeholder', 'Due Date');
+    dateInput.setAttribute('type', 'date');
+    //dateInput.setAttribute('placeholder', 'Due Date');
     newForm.appendChild(dateInput);
 
     const priorityWrapper = document.createElement('div');
