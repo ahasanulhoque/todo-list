@@ -2,7 +2,7 @@ import {renderSidebar, renderSidebarTodos, renderMain, renderPage} from './rende
 import {Project} from './project-logic.js'
 import {toDo, toggleStatus} from './todo-logic.js';
 import {showProjectForm, renderProject} from './render-project.js'
-import {showToDoForm, removeToDoForm, renderToDo, expandToDo} from './render-todo.js'
+import {showToDoForm, removeToDoForm, renderToDo, expandToDo, editToDo} from './render-todo.js'
 
 const PageController = (() => {
     const content = document.querySelector('#content');
@@ -72,7 +72,7 @@ const PageController = (() => {
 
         if (button.id == 'new-to-do'){
             //Call a form function from a render module
-            showToDoForm(content);
+            showToDoForm(content, 'Add');
 
             //Select the form now shown on screen
             let form = document.querySelector('form');
@@ -104,15 +104,45 @@ const PageController = (() => {
                         renderSidebarTodos(document.querySelector('#sidebar').querySelector(`[data-index="${selectedProjectDOM.dataset.index}"]`).querySelector('.todos-sidebar'),
                                             newToDo.title, newToDo.dueDate)
                         
-                        
-                        console.log(newToDo);
                     }
                 }
             }
         } else if(button.getAttribute('class') == 'expand-todo'){
             expandToDo(document.querySelector('#todos-list').querySelector(`[data-index="${button.getAttribute('data-index')}"]`));
         } else if(button.getAttribute('class') == 'edit-todo'){
-            alert('edit');
+            //Show edit form and then pass values to todo object
+            showToDoForm(content, 'Edit');
+            let form = document.querySelector('form');
+
+            form.onclick = function(f){
+                let newButton = f.target;
+                if (newButton.tagName == 'BUTTON'){
+                    //If submit or cancel button is selected, remove the form
+                    removeToDoForm(content,form);
+                    if (newButton.id == 'submit-todo'){
+                        //If todo form is submitted instead of canceled
+                        //Update  todo object
+                        projectsList[projectIndex].todos[button.getAttribute('data-index')].title = form.elements.namedItem('todo-title').value;
+                        projectsList[projectIndex].todos[button.getAttribute('data-index')].description = form.elements.namedItem('description').value;
+                        projectsList[projectIndex].todos[button.getAttribute('data-index')].dueDate = form.elements.namedItem('date').value;
+                        projectsList[projectIndex].todos[button.getAttribute('data-index')].priority = form.elements.namedItem('priority').value;
+
+                        //Edit todo DOM object
+                        editToDo(document.querySelector('#todos-list').querySelector(`[data-index="${button.getAttribute('data-index')}"]`),
+                                 projectsList[projectIndex].todos[button.getAttribute('data-index')].title = form.elements.namedItem('todo-title').value,
+                                 projectsList[projectIndex].todos[button.getAttribute('data-index')].description = form.elements.namedItem('description').value,
+                                 projectsList[projectIndex].todos[button.getAttribute('data-index')].dueDate = form.elements.namedItem('date').value,
+                                 projectsList[projectIndex].todos[button.getAttribute('data-index')].priority = form.elements.namedItem('priority').value);
+                    }
+                }
+            }
+
+            /*projectsList[projectIndex].todos[button.getAttribute('data-index')].title = form.elements.namedItem('todo-title').value;
+            projectsList[projectIndex].todos[button.getAttribute('data-index')].description = form.elements.namedItem('description').value;
+            projectsList[projectIndex].todos[button.getAttribute('data-index')].date = form.elements.namedItem('date').value;
+            projectsList[projectIndex].todos[button.getAttribute('data-index')].priority = form.elements.namedItem('priority').value;
+
+            console.log(projectsList[projectIndex].todos[button.getAttribute('data-index')]);*/
         } else if(button.getAttribute('class') == 'check-todo'){
             //projectsList[projectIndex].todos[button.getAttribute('data-index')].toggleStatus();
             toggleStatus(projectsList[projectIndex].todos[button.getAttribute('data-index')].status);
@@ -138,7 +168,6 @@ const PageController = (() => {
     }
 })();
 
-//Change todo.priority from integer to string (high, medium, low)?
 
 /*
 11/10/20 NOTES:

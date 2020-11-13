@@ -2,11 +2,14 @@
 //Show form on page
 //On click of submit button, return user values and close form
 
-const showToDoForm = (content) => {
+const showToDoForm = (content, action) => {
+    //action is a string, used to show either 'Add' or 'Edit' on the form, according to
+    //what was clicked
+
     const newForm = document.createElement('form');
 
     const toDoTitle = document.createElement('h3');
-    toDoTitle.innerHTML = "New ToDo";
+    toDoTitle.innerHTML = `${action} Todo`;
     newForm.appendChild(toDoTitle);
 
     const titleLabel = document.createElement('label');
@@ -88,7 +91,7 @@ const showToDoForm = (content) => {
     const submit = document.createElement('button');
     submit.setAttribute('type', 'button');
     submit.id = 'submit-todo';
-    submit.innerHTML = 'Add ToDo';
+    submit.innerHTML = `${action} Todo`;
     newForm.appendChild(submit);
 
     const cancel = document.createElement('button');
@@ -128,10 +131,12 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex) 
     todoTopRow.classList.add('todo-top-row');
 
     const titleDOM = document.createElement('h3');
+    titleDOM.classList.add('todo-title');
     titleDOM.innerHTML = title;
     todoTopRow.appendChild(titleDOM);
 
     const dueDateDOM = document.createElement('p');
+    dueDateDOM.classList.add('todo-due-date');
     dueDateDOM.innerHTML = dueDate;
     todoTopRow.appendChild(dueDateDOM);
 
@@ -175,11 +180,13 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex) 
     todoDetails.classList.add('todo-details-hidden');
 
     const descriptionDOM = document.createElement('p');
+    descriptionDOM.classList.add('todo-description');
     descriptionDOM.innerHTML = description;
     todoDetails.appendChild(descriptionDOM);
 
     //May need to take priorityDOM out if it is not displayed on page
     const priorityDOM = document.createElement('p');
+    priorityDOM.classList.add('todo-priority');
     priorityDOM.innerHTML = priority;
     todoDetails.appendChild(priorityDOM);
 
@@ -202,4 +209,35 @@ const expandToDo = (todoDOM) => {
     detailsDOM.classList.toggle('todo-details-hidden');
 }
 
-export {showToDoForm, removeToDoForm, renderToDo, expandToDo};
+const editToDo = (todoDOM, title, description, dueDate, priority) => {
+    //Function to edit a todo already in the DOM tree
+
+    let titleDOM = todoDOM.querySelector('.todo-title');
+    titleDOM.innerHTML = title;
+    
+    let descriptionDOM = todoDOM.querySelector('.todo-description');
+    descriptionDOM.innerHTML = description;
+
+    let dueDateDOM = todoDOM.querySelector('.todo-due-date');
+    dueDateDOM.innerHTML = dueDate;
+
+    let priorityDOM = todoDOM.querySelector('.todo-priority');
+    priorityDOM.innerHTML = priority;
+
+    //Change todo DOM object's priority class, to update styling
+    if (priority == 'Low priority'){
+        todoDOM.classList.add('low-priority');
+        todoDOM.classList.remove('medium-priority');
+        todoDOM.classList.remove('high-priority');
+    } else if(priority == 'Medium priority'){
+        todoDOM.classList.add('medium-priority');
+        todoDOM.classList.remove('low-priority');
+        todoDOM.classList.remove('high-priority');
+    } else if(priority == 'High priority'){
+        todoDOM.classList.add('high-priority');
+        todoDOM.classList.remove('low-priority');
+        todoDOM.classList.remove('medium-priority');
+    }
+}
+
+export {showToDoForm, removeToDoForm, renderToDo, expandToDo, editToDo};
