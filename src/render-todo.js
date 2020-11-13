@@ -188,10 +188,17 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex) 
     toDosDOM.appendChild(toDoDOM);
 }
 
-const expandToDo = (detailsDOM) => {
+const expandToDo = (todoDOM) => {
     //Change expand button to opposite
-    //toggle class
-    
+    let expandButton = todoDOM.querySelector('.expand-todo');
+    if (expandButton.innerHTML == '+'){
+        expandButton.innerHTML = '-';
+    } else {
+        expandButton.innerHTML = '+';
+    }
+
+    //Toggle class for details section
+    let detailsDOM = todoDOM.querySelector('.todo-details');
     detailsDOM.classList.toggle('todo-details-hidden');
 }
 

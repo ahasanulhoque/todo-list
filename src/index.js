@@ -110,7 +110,7 @@ const PageController = (() => {
                 }
             }
         } else if(button.getAttribute('class') == 'expand-todo'){
-            expandToDo(document.querySelector('#todos-list').querySelector(`[data-index="${button.getAttribute('data-index')}"]`).querySelector('.todo-details'));
+            expandToDo(document.querySelector('#todos-list').querySelector(`[data-index="${button.getAttribute('data-index')}"]`));
         } else if(button.getAttribute('class') == 'edit-todo'){
             alert('edit');
         } else if(button.getAttribute('class') == 'check-todo'){
