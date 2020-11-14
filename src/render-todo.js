@@ -1,3 +1,7 @@
+import { format } from 'date-fns'
+
+
+
 //Function for newToDo form
 //Show form on page
 //On click of submit button, return user values and close form
@@ -42,7 +46,6 @@ const showToDoForm = (content, action) => {
     const dateInput = document.createElement('input');
     dateInput.setAttribute('name', 'date');
     dateInput.setAttribute('type', 'date');
-    //dateInput.setAttribute('placeholder', 'Due Date');
     newForm.appendChild(dateInput);
 
     const priorityWrapper = document.createElement('div');
@@ -137,7 +140,7 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex) 
 
     const dueDateDOM = document.createElement('p');
     dueDateDOM.classList.add('todo-due-date');
-    dueDateDOM.innerHTML = dueDate;
+    dueDateDOM.innerHTML = format(Date.UTC(dueDate.slice(0,4), dueDate.slice(5,7)-1, dueDate.slice(8,10))+86400000, 'MM/dd/yyyy');
     todoTopRow.appendChild(dueDateDOM);
 
     //Section for buttons

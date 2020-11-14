@@ -52,7 +52,6 @@ const PageController = (() => {
 
                         //Push to projectsList array and test if working
                         projectsList.push(newProject);
-                        console.log(projectsList);
 
                         //Add new project to sidebar
                         renderSidebar(newProject.name, projectsList.indexOf(newProject));
@@ -161,7 +160,8 @@ const PageController = (() => {
 /*
 11/10/20 NOTES:
 STILL NEED TO ADD:
-EDIT FUNCITONALITY
+EDIT FUNCITONALITY FOR PROJECT NAMES
+DELETE PROJECTS
 LOCALSTORAGE
 DATE-FNS
 */
