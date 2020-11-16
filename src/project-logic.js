@@ -10,8 +10,8 @@ const Project = (name) => {
     return {name, todos, deleteToDo}
 }
 
-/*Project.prototype.deleteToDo = function(todosArray, removedTodoIndex){
-    todosArray.splice(removedTodoIndex, 1);
-}*/
+const deleteProject = (projectsList, deletedProjectIndex) => {
+    projectsList.splice(deletedProjectIndex, 1);
+}
 
-export {Project}
+export { Project, deleteProject }

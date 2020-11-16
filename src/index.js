@@ -1,5 +1,5 @@
 import {renderSidebar, renderMain, renderPage} from './render-page.js'
-import {Project} from './project-logic.js'
+import {Project, deleteProject} from './project-logic.js'
 import {toDo, toggleStatus} from './todo-logic.js';
 import {showProjectForm, renderProject} from './render-project.js'
 import {showToDoForm, removeToDoForm, renderToDo, expandToDo, editToDo} from './render-todo.js'
@@ -152,6 +152,22 @@ const PageController = (() => {
                 renderToDo(document.querySelector('#todos-list'), todo.title, todo.description,
                             todo.dueDate, todo.priority, projectsList[projectIndex].todos.indexOf(todo));            
             });
+        } else if(button.id == 'edit-project'){
+            //Funcitonality to edit project
+            alert('edit');
+        } else if(button.id == 'delete-project'){
+            //Functonality to delete project
+            deleteProject(projectsList, document.querySelector('#project-full').dataset.index);
+            console.log(projectsList);
+
+            //Delete projects from sidebar and render sidebar again
+            document.querySelector('#sidebar').querySelectorAll('.project-sidebar').forEach(n => n.remove());
+            projectsList.forEach((project, index) => {
+                renderSidebar(project.name, index)
+            });
+
+            //Render new first project in full
+            renderMain(content, projectsList[0].name, 0);
         }
     }
 })();

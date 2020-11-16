@@ -1,6 +1,6 @@
 const renderSidebar = (projectName, index) => {
     //render the sidebar
-    //should have project titles and todo titles
+    //should have project titles
 
     const sidebar = document.querySelector('#sidebar');
 
@@ -12,12 +12,7 @@ const renderSidebar = (projectName, index) => {
     projectSideName.dataset.index = index;
     projectSideName.innerHTML = projectName;
 
-    //The below element will contain the list of the project's todos
-    const todosList = document.createElement('secton');
-    todosList.classList.add('todos-sidebar');
-
     projectSide.appendChild(projectSideName);
-    projectSide.appendChild(todosList);
     sidebar.appendChild(projectSide);
 }
 
