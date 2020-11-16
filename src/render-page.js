@@ -37,10 +37,30 @@ const renderMain = (content, projectTitle, index) => {
                                                             //equal to the project's index in the
                                                             //project array
 
+    //This section will have the project title and buttons to edit the project title or delete
+    //the project
+    const projectTopRow = document.createElement('div');
+    projectTopRow.id = 'project-top-row';
+
     const projectTitleDOM = document.createElement('h2');
     projectTitleDOM.innerHTML = projectTitle;
-    projectMainDOM.appendChild(projectTitleDOM);
+    projectTopRow.appendChild(projectTitleDOM);
+
+    const editProjectButton = document.createElement('button');
+    editProjectButton.id = 'edit-project';
+    editProjectButton.setAttribute('title', 'Edit Project');
+    editProjectButton.innerHTML = '\u270e';
+    projectTopRow.appendChild(editProjectButton);
+
+    const deleteProjectButton = document.createElement('button');
+    deleteProjectButton.id = 'delete-project';
+    deleteProjectButton.setAttribute('title', 'Delete Project');
+    deleteProjectButton.innerHTML = 'X';
+    projectTopRow.appendChild(deleteProjectButton);
+
+    projectMainDOM.appendChild(projectTopRow);
     
+    //This section will have all the todos
     const toDosDOM = document.createElement('secton');
     toDosDOM.id = 'todos-list';
     projectMainDOM.appendChild(toDosDOM);
