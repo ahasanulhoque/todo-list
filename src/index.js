@@ -156,9 +156,8 @@ const PageController = (() => {
             //Funcitonality to edit project
             alert('edit');
         } else if(button.id == 'delete-project'){
-            //Functonality to delete project
+            //Delete project from projectsList array
             deleteProject(projectsList, document.querySelector('#project-full').dataset.index);
-            console.log(projectsList);
 
             //Delete projects from sidebar and render sidebar again
             document.querySelector('#sidebar').querySelectorAll('.project-sidebar').forEach(n => n.remove());
@@ -168,6 +167,10 @@ const PageController = (() => {
 
             //Render new first project in full
             renderMain(content, projectsList[0].name, 0);
+            projectsList[0].todos.forEach((todo) => {
+                renderToDo(document.querySelector('#todos-list'), todo.title, todo.description,
+                            todo.dueDate, todo.priority, projectsList[0].todos.indexOf(todo));
+            });
         }
     }
 })();
