@@ -142,7 +142,6 @@ const PageController = (() => {
             
             let todoIndex = button.getAttribute('data-index');
             projectsList[projectIndex].deleteToDo(projectsList[projectIndex].todos, todoIndex);
-            console.log(projectsList[projectIndex]);
 
             //Next, remove the deleted todo from the page.
             //Will need to render all todos again since data-indices need to be changed
@@ -165,12 +164,18 @@ const PageController = (() => {
                 renderSidebar(project.name, index)
             });
 
-            //Render new first project in full
-            renderMain(content, projectsList[0].name, 0);
-            projectsList[0].todos.forEach((todo) => {
-                renderToDo(document.querySelector('#todos-list'), todo.title, todo.description,
-                            todo.dueDate, todo.priority, projectsList[0].todos.indexOf(todo));
-            });
+            //Render new first project in full. Only do this if projectsList is not empty
+            if (projectsList.length > 0){
+                renderMain(content, projectsList[0].name, 0);
+                projectsList[0].todos.forEach((todo) => {
+                    renderToDo(document.querySelector('#todos-list'), todo.title, todo.description,
+                                todo.dueDate, todo.priority, projectsList[0].todos.indexOf(todo));
+                });
+            } else {
+                //If projectsList is empty, remove the project from the full view but do not try
+                //to display another program
+                content.removeChild(document.querySelector('#project-full'));
+            }
         }
     }
 })();
