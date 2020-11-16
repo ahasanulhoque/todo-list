@@ -11,8 +11,6 @@ const PageController = (() => {
 
     let projectsList = []; //All project objects will go in this array
     projectsList.push(defaultProject);
-    let projectCount = 0; //This variable will be used to store
-                          //arrays in projectsList at index
 
     //Add default project to sidebar
     renderSidebar(defaultProject.name, projectsList.indexOf(defaultProject));
@@ -55,6 +53,12 @@ const PageController = (() => {
 
                         //Add new project to sidebar
                         renderSidebar(newProject.name, projectsList.indexOf(newProject));
+
+                        //If the new project is the only project in projectsList (i.e. all other projects
+                        //had been deleted) render it in full immediately
+                        if(projectsList.length == 1){
+                            renderMain(content, newProject.name, projectsList.indexOf(newProject));
+                        }
                     }
                 }
             }
