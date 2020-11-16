@@ -18,6 +18,10 @@
     width: 90vw;
 }
 
+#project-top-row {
+    display: flex;
+}
+
 #project-form {
     z-index: 1;
     display: flex;
