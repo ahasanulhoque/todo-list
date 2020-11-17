@@ -56,9 +56,9 @@ const PageController = (() => {
 
                         //If the new project is the only project in projectsList (i.e. all other projects
                         //had been deleted) render it in full immediately
-                        if(projectsList.length == 1){
-                            renderMain(content, newProject.name, projectsList.indexOf(newProject));
-                        }
+                        
+                        renderMain(content, newProject.name, projectsList.indexOf(newProject));
+                        
                     }
                 }
             }
@@ -67,7 +67,8 @@ const PageController = (() => {
     }
 
     content.onclick = function(e){
-        //Listen for creation of new todos or deletion of existing todos
+        //Listen for creation of new todos, or editing or deletion of existing todos
+        //Also listen for editing or deletion of currently selected project.
         let button = e.target;
 
         //Location of the selected project in the projects array, used in several of below if statements
@@ -96,12 +97,11 @@ const PageController = (() => {
                         
                         //Push to projects todos array by finding the correct project using the displayed
                         //project's data-index
-                        let selectedProjectDOM = document.querySelector('#project-full');
-                        projectsList[selectedProjectDOM.dataset.index].todos.push(newToDo);
+                        projectsList[projectIndex].todos.push(newToDo);
 
                         //Render new todo on page
                         renderToDo(document.querySelector('#todos-list'), newToDo.title, newToDo.description, newToDo.dueDate,
-                                        newToDo.priority, projectsList[selectedProjectDOM.dataset.index].todos.indexOf(newToDo));
+                                        newToDo.priority, projectsList[projectIndex].todos.indexOf(newToDo));
                         
                     }
                 }
