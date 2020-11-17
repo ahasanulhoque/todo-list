@@ -1,4 +1,4 @@
-const showProjectForm = (content) => {
+const showProjectForm = (content, action) => {
     const projectForm = document.createElement('form');
     projectForm.id = 'project-form';
 
@@ -16,7 +16,7 @@ const showProjectForm = (content) => {
     const submit = document.createElement('button');
     submit.setAttribute('type', 'button');
     submit.id = 'submit-project';
-    submit.innerHTML = 'Add Project';
+    submit.innerHTML = `${action} Project`;
     projectForm.appendChild(submit);
 
     const cancel = document.createElement('button');

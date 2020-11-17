@@ -33,7 +33,7 @@ const PageController = (() => {
             //allow user to create a project
             //Call a function to show a form to create a new project
 
-            showProjectForm(content);
+            showProjectForm(content, 'Add');
             //Select the form now shown on screen
             let form = document.querySelector('form');
 
@@ -53,10 +53,8 @@ const PageController = (() => {
 
                         //Add new project to sidebar
                         renderSidebar(newProject.name, projectsList.indexOf(newProject));
-
-                        //If the new project is the only project in projectsList (i.e. all other projects
-                        //had been deleted) render it in full immediately
                         
+                        //Render the project in full
                         renderMain(content, newProject.name, projectsList.indexOf(newProject));
                         
                     }
@@ -157,7 +155,35 @@ const PageController = (() => {
             });
         } else if(button.id == 'edit-project'){
             //Funcitonality to edit project
-            alert('edit');
+
+            //Show project form again to edit the project
+            showProjectForm(content, 'Edit');
+            //Select the form now shown on screen
+            let form = document.querySelector('form');
+
+            //Listen for clicks to add a project, or cancel the project form
+            form.onclick = function(f){
+                let newButton = f.target;
+                if (newButton.tagName == 'BUTTON'){
+                    //If either button is clicked, remove the form
+                    removeToDoForm(content, form);
+
+                    //If form is submitted, edit the project
+                    if (newButton.id == 'submit-project'){
+                        //Change the selected project's name
+                        projectsList[projectIndex].name = form.elements.namedItem('project-title').value;
+
+                        //Delete projects from sidebar and render sidebar again
+                        document.querySelector('#sidebar').querySelectorAll('.project-sidebar').forEach(n => n.remove());
+                        projectsList.forEach((project, index) => {
+                            renderSidebar(project.name, index)
+                        });
+                        
+                        //Render the project again
+                        renderMain(content, projectsList[projectIndex].name, projectIndex);          
+                    }
+                }
+            }
         } else if(button.id == 'delete-project'){
             //Delete project from projectsList array
             deleteProject(projectsList, document.querySelector('#project-full').dataset.index);
@@ -188,8 +214,6 @@ const PageController = (() => {
 /*
 11/10/20 NOTES:
 STILL NEED TO ADD:
-EDIT FUNCITONALITY FOR PROJECT NAMES
-DELETE PROJECTS
 LOCALSTORAGE
 DATE-FNS
 */
