@@ -1,22 +1,31 @@
 import {renderSidebar, renderMain, renderPage} from './render-page.js'
-import {Project, deleteProject} from './project-logic.js'
+import {Project, deleteToDo, deleteProject} from './project-logic.js'
 import {toDo, toggleStatus} from './todo-logic.js';
 import {showProjectForm, renderProject} from './render-project.js'
 import {showToDoForm, removeToDoForm, renderToDo, expandToDo, editToDo} from './render-todo.js'
+import { saveProjects , getProjects } from './storage-functions.js'
 
 const PageController = (() => {
     const content = document.querySelector('#content');
     const sidebar = document.querySelector('#sidebar');
-    const defaultProject = Project('Default project');
 
     let projectsList = []; //All project objects will go in this array
-    projectsList.push(defaultProject);
 
-    //Add default project to sidebar
-    renderSidebar(defaultProject.name, projectsList.indexOf(defaultProject));
+    //Retrieve projects from storage or push Default project to projectsList if nothing
+    //is available in storage or if there is no storage
+    projectsList = getProjects('projectsList', projectsList, Project('Default project'));
 
-    //Show default project in main view
-    renderMain(content, defaultProject.name, projectsList.indexOf(defaultProject));
+    //Show the first project in the main view, and render each of its todos
+    renderMain(content, projectsList[0].name, 0);
+    projectsList[0].todos.forEach((todo) => {
+        renderToDo(document.querySelector('#todos-list'), todo.title, todo.description,
+                    todo.dueDate, todo.priority, 0);
+    });
+
+    //Render the sidebar with all loaded projects
+    projectsList.forEach((project, index) => {
+        renderSidebar(project.name, index)
+    });
 
     //Listen for clicks on projects in sidebar, or New Project button to create a project
     sidebar.onclick = function(e){
@@ -57,6 +66,8 @@ const PageController = (() => {
                         //Render the project in full
                         renderMain(content, newProject.name, projectsList.indexOf(newProject));
                         
+                        //Save the project to localStorage
+                        saveProjects('projectsList', projectsList);
                     }
                 }
             }
@@ -101,6 +112,8 @@ const PageController = (() => {
                         renderToDo(document.querySelector('#todos-list'), newToDo.title, newToDo.description, newToDo.dueDate,
                                         newToDo.priority, projectsList[projectIndex].todos.indexOf(newToDo));
                         
+                        //Save the new todo in localStorage
+                        saveProjects('projectsList', projectsList);
                     }
                 }
             }
@@ -130,6 +143,9 @@ const PageController = (() => {
                                  projectsList[projectIndex].todos[button.getAttribute('data-index')].description = form.elements.namedItem('description').value,
                                  projectsList[projectIndex].todos[button.getAttribute('data-index')].dueDate = form.elements.namedItem('date').value,
                                  projectsList[projectIndex].todos[button.getAttribute('data-index')].priority = form.elements.namedItem('priority').value);
+
+                        //Save edited todo in localStorage
+                        saveProjects('projectsList', projectsList);
                     }
                 }
             }
@@ -143,7 +159,7 @@ const PageController = (() => {
             //First, remove the deleted todo from its project's todos array
             
             let todoIndex = button.getAttribute('data-index');
-            projectsList[projectIndex].deleteToDo(projectsList[projectIndex].todos, todoIndex);
+            deleteToDo(projectsList[projectIndex].todos, todoIndex);
 
             //Next, remove the deleted todo from the page.
             //Will need to render all todos again since data-indices need to be changed
@@ -153,6 +169,9 @@ const PageController = (() => {
                 renderToDo(document.querySelector('#todos-list'), todo.title, todo.description,
                             todo.dueDate, todo.priority, projectsList[projectIndex].todos.indexOf(todo));            
             });
+
+            //Save projects to localStorage, with todo deleted
+            saveProjects('projectsList', projectsList);
         } else if(button.id == 'edit-project'){
             //Funcitonality to edit project
 
@@ -180,7 +199,10 @@ const PageController = (() => {
                         });
                         
                         //Render the project again
-                        renderMain(content, projectsList[projectIndex].name, projectIndex);          
+                        renderMain(content, projectsList[projectIndex].name, projectIndex);
+
+                        //Save projects to localStorage, with project edited
+                        saveProjects('projectsList', projectsList);         
                     }
                 }
             }
@@ -206,10 +228,17 @@ const PageController = (() => {
                 //to display another program
                 content.removeChild(document.querySelector('#project-full'));
             }
+
+            //Save projects to localStorage, with project deleted from it
+            saveProjects('projectsList', projectsList);
         }
     }
 })();
 
+/*
+11/16/20 NOTES:
+MOVE PAGECONTROLLER INTO ITS OWN MODULE?
+*/
 
 /*
 11/10/20 NOTES:
