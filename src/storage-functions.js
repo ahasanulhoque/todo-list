@@ -50,12 +50,13 @@ const getProjects = (itemName, itemValue, defaultValue) => {
             //If projectsList does have at least 1 project, then retrieve projects from storage
             return JSON.parse(localStorage.getItem(itemName));
         }
-    } else {
-        //If localStorage is not available or projectsList does not exist yet,
-        //then populate projectsList with default project 
-        itemValue.push(defaultValue);
-        return itemValue;
-    }
+    } 
+    
+    //If localStorage is not available, projectsList does not exist yet, or if projectsList
+    //does not have at least 1 project, then populate projectsList with default project 
+    itemValue.push(defaultValue);
+    return itemValue;
+    
 }
 
 export { saveProjects , getProjects }
