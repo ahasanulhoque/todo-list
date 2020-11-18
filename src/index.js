@@ -13,7 +13,7 @@ const PageController = (() => {
 
     //Retrieve projects from storage or push Default project to projectsList if nothing
     //is available in storage or if there is no storage
-    projectsList = getProjects('projectsList', projectsList, Project('Default project'));
+    projectsList = getProjects('projectsList', projectsList, Project('My first project'));
 
     //Show the first project in the main view, and render each of its todos
     renderMain(content, projectsList[0].name, 0);
