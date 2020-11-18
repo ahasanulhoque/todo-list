@@ -43,10 +43,13 @@ const saveProjects = (itemName, itemValue) => {
 
 const getProjects = (itemName, itemValue, defaultValue) => {
     //itemName should be a string, and the name of the variable we are looking for
-    if (storageAvailable('localStorage') && JSON.parse(localStorage.getItem(itemName)).length >= 1) {
-        //If localStorage is available and projectsList is already populated with at least 1 project,
-        //then retrieve the projects
-        return JSON.parse(localStorage.getItem(itemName));
+    if (storageAvailable('localStorage') && localStorage.getItem(itemName)) {
+        //If localStorage is available and projectsList is already populated,
+        //then check if projectsList has at least 1 project.
+        if (JSON.parse(localStorage.getItem(itemName)).length >= 1){
+            //If projectsList does have at least 1 project, then retrieve projects from storage
+            return JSON.parse(localStorage.getItem(itemName));
+        }
     } else {
         //If localStorage is not available or projectsList does not exist yet,
         //then populate projectsList with default project 
