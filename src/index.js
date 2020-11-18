@@ -1,7 +1,7 @@
 import {renderSidebar, renderMain, renderPage} from './render-page.js'
 import {Project, deleteToDo, deleteProject} from './project-logic.js'
 import {toDo, toggleStatus} from './todo-logic.js';
-import {showProjectForm, renderProject} from './render-project.js'
+import { showProjectForm , updateProjectName } from './render-project.js'
 import {showToDoForm, removeToDoForm, renderToDo, expandToDo, editToDo} from './render-todo.js'
 import { saveProjects , getProjects } from './storage-functions.js'
 
@@ -193,13 +193,16 @@ const PageController = (() => {
                         projectsList[projectIndex].name = form.elements.namedItem('project-title').value;
 
                         //Delete projects from sidebar and render sidebar again
-                        document.querySelector('#sidebar').querySelectorAll('.project-sidebar').forEach(n => n.remove());
+                        /*document.querySelector('#sidebar').querySelectorAll('.project-sidebar').forEach(n => n.remove());
                         projectsList.forEach((project, index) => {
                             renderSidebar(project.name, index)
-                        });
+                        });*/
+
+                        //Change the project name in the sidebar
+                        updateProjectName(document.querySelector('#sidebar').querySelector(`[data-index="${projectIndex}"]`).querySelector('h3'), projectsList[projectIndex].name);
                         
-                        //Render the project again
-                        renderMain(content, projectsList[projectIndex].name, projectIndex);
+                        //Change the project name in full project view in DOM
+                        updateProjectName(document.querySelector('#project-top-row').querySelector('h2'), projectsList[projectIndex].name);
 
                         //Save projects to localStorage, with project edited
                         saveProjects('projectsList', projectsList);         

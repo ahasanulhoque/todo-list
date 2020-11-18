@@ -28,14 +28,8 @@ const showProjectForm = (content, action) => {
     content.appendChild(projectForm);
 }
 
-const renderProject = (content, projectName) => {
-    const projectDOM = document.createElement('div');
-
-    const projectNameDOM = document.createElement('h2');
+const updateProjectName = (projectNameDOM, projectName) => {
     projectNameDOM.innerHTML = projectName;
-    projectDOM.appendChild(projectNameDOM);
-
-    content.appendChild(projectDOM);
 }
 
-export {showProjectForm, renderProject}
+export {showProjectForm, updateProjectName}
