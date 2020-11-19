@@ -157,8 +157,6 @@ const PageController = (() => {
 
             //Save todo status changes to localStorage
             saveProjects('projectsList', projectsList);
-
-            console.log(projectsList[projectIndex].todos[button.getAttribute('data-index')]);
         } else if(button.getAttribute('class') == 'delete-todo'){
             //Button to delete todos
 

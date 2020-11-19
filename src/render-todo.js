@@ -11,6 +11,7 @@ const showToDoForm = (content, action) => {
     //what was clicked
 
     const newForm = document.createElement('form');
+    newForm.id = 'todo-form';
 
     const toDoTitle = document.createElement('h3');
     toDoTitle.innerHTML = `${action} Todo`;
@@ -49,9 +50,7 @@ const showToDoForm = (content, action) => {
     newForm.appendChild(dateInput);
 
     const priorityWrapper = document.createElement('div');
-    const priorityQuestion = document.createElement('p');
-    priorityQuestion.innerHTML = 'Todo priority:'
-    priorityWrapper.appendChild(priorityQuestion);
+    priorityWrapper.id = 'priority-question-wrapper';
 
     const priorityInputLow = document.createElement('input');
     priorityInputLow.id = 'low-priority';
@@ -137,15 +136,20 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex, 
     const todoTopRow = document.createElement('div');
     todoTopRow.classList.add('todo-top-row');
 
+    const todoNameAndDate = document.createElement('div');
+    todoNameAndDate.classList.add('todo-name-and-date');
+
     const titleDOM = document.createElement('h3');
     titleDOM.classList.add('todo-title');
     titleDOM.innerHTML = title;
-    todoTopRow.appendChild(titleDOM);
+    todoNameAndDate.appendChild(titleDOM);
 
     const dueDateDOM = document.createElement('p');
     dueDateDOM.classList.add('todo-due-date');
     dueDateDOM.innerHTML = format(Date.UTC(dueDate.slice(0,4), dueDate.slice(5,7)-1, dueDate.slice(8,10))+86400000, 'MM/dd/yyyy');
-    todoTopRow.appendChild(dueDateDOM);
+    todoNameAndDate.appendChild(dueDateDOM);
+
+    todoTopRow.appendChild(todoNameAndDate);
 
     //Section for buttons
     const todoButtons = document.createElement('div');
@@ -196,7 +200,7 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex, 
     priorityDOM.classList.add('todo-priority');
     priorityDOM.innerHTML = priority;
     todoDetails.appendChild(priorityDOM);
-
+    
     toDoDOM.appendChild(todoDetails);
 
     toDosDOM.appendChild(toDoDOM);

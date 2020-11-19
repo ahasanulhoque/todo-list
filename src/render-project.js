@@ -2,6 +2,10 @@ const showProjectForm = (content, action) => {
     const projectForm = document.createElement('form');
     projectForm.id = 'project-form';
 
+    const formTitle = document.createElement('h3');
+    formTitle.innerHTML = `${action} Project`;
+    projectForm.appendChild(formTitle);
+
     const projectTitleLabel = document.createElement('label');
     projectTitleLabel.setAttribute('for', 'project-title');
     projectTitleLabel.innerHTML = 'Project Title';

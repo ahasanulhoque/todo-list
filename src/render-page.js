@@ -2,18 +2,19 @@ const renderSidebar = (projectName, index) => {
     //render the sidebar
     //should have project titles
 
-    const sidebar = document.querySelector('#sidebar');
+    const sidebarListOfProjects = document.querySelector('#projects-list');
 
-    const projectSide = document.createElement('section');  //The sidebar instance of the whole project
+    const projectSide = document.createElement('button');  //The sidebar instance of the whole project
     projectSide.dataset.index = index;
     projectSide.classList.add('project-sidebar');
+    projectSide.innerHTML = projectName;
 
-    const projectSideName = document.createElement('h3');
+    /*const projectSideName = document.createElement('h3');
     projectSideName.dataset.index = index;
     projectSideName.innerHTML = projectName;
 
-    projectSide.appendChild(projectSideName);
-    sidebar.appendChild(projectSide);
+    projectSide.appendChild(projectSideName);*/
+    sidebarListOfProjects.appendChild(projectSide);
 }
 
 const renderMain = (content, projectTitle, index) => {
@@ -41,17 +42,27 @@ const renderMain = (content, projectTitle, index) => {
     projectTitleDOM.innerHTML = projectTitle;
     projectTopRow.appendChild(projectTitleDOM);
 
+    const projectButtonWrapper = document.createElement('div');
+    projectButtonWrapper.id = 'project-buttons';
+
+    const newToDo = document.createElement('button');
+    newToDo.innerHTML = 'New Todo';
+    newToDo.id = 'new-to-do';
+    projectButtonWrapper.appendChild(newToDo);
+
     const editProjectButton = document.createElement('button');
     editProjectButton.id = 'edit-project';
     editProjectButton.setAttribute('title', 'Edit Project');
     editProjectButton.innerHTML = '\u270e';
-    projectTopRow.appendChild(editProjectButton);
+    projectButtonWrapper.appendChild(editProjectButton);
 
     const deleteProjectButton = document.createElement('button');
     deleteProjectButton.id = 'delete-project';
     deleteProjectButton.setAttribute('title', 'Delete Project');
     deleteProjectButton.innerHTML = 'X';
-    projectTopRow.appendChild(deleteProjectButton);
+    projectButtonWrapper.appendChild(deleteProjectButton);
+
+    projectTopRow.appendChild(projectButtonWrapper);
 
     projectMainDOM.appendChild(projectTopRow);
     
@@ -59,11 +70,6 @@ const renderMain = (content, projectTitle, index) => {
     const toDosDOM = document.createElement('secton');
     toDosDOM.id = 'todos-list';
     projectMainDOM.appendChild(toDosDOM);
-
-    const newToDo = document.createElement('button');
-    newToDo.innerHTML = 'New ToDo';
-    newToDo.id = 'new-to-do';
-    projectMainDOM.appendChild(newToDo);
    
     content.appendChild(projectMainDOM);
 }
@@ -76,33 +82,24 @@ const renderPage = (() => {
     const sidebar = document.createElement('section');
     sidebar.id = 'sidebar';
 
+    const sidebarTopWrapper = document.createElement('div');
+    sidebarTopWrapper.id = 'sidebar-top-wrapper'
+
     const sidebarTitle = document.createElement('h2');
     sidebarTitle.innerHTML = 'Projects'
+    sidebarTopWrapper.appendChild(sidebarTitle);
 
     const newProject = document.createElement('button');
     newProject.innerHTML = 'New Project';
     newProject.id = 'new-project';
+    sidebarTopWrapper.appendChild(newProject);
 
-    sidebar.appendChild(sidebarTitle);
-    sidebar.appendChild(newProject);
+    const sidebarListOfProjects = document.createElement('section');
+    sidebarListOfProjects.id = 'projects-list';
+
+    sidebar.appendChild(sidebarTopWrapper);
+    sidebar.appendChild(sidebarListOfProjects);
     content.appendChild(sidebar);
-
-    /*
-    const defaultProject = document.createElement('div');
-    const projectTitle = document.createElement('h2');
-    const newToDo = document.createElement('button');
-
-    projectTitle.innerHTML = 'Default Project';
-
-    newToDo.innerHTML = 'New ToDo';
-    newToDo.classList.add('new-to-do');
-
-    defaultProject.appendChild(projectTitle);
-    defaultProject.appendChild(newToDo);
-
-    
-    content.appendChild(defaultProject);
-    */
 })();
 
 export {renderSidebar, renderMain, renderPage};
