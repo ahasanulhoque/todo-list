@@ -181,7 +181,7 @@ const PageController = (() => {
             //Funcitonality to edit project
 
             //Show project form again to edit the project
-            showProjectForm(content, 'Edit');
+            showProjectForm(content, 'Edit', projectsList[projectIndex].name);
             //Select the form now shown on screen
             let form = document.querySelector('form');
 

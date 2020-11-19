@@ -1,4 +1,4 @@
-const showProjectForm = (content, action) => {
+const showProjectForm = (content, action, existingValue) => {
     const projectForm = document.createElement('form');
     projectForm.id = 'project-form';
 
@@ -15,6 +15,7 @@ const showProjectForm = (content, action) => {
     projectTitleInput.setAttribute('name', 'project-title');
     projectTitleInput.setAttribute('type', 'text');
     projectTitleInput.setAttribute('placeholder', 'Project Title');
+    if (existingValue) {projectTitleInput.setAttribute('value', existingValue);}
     projectForm.appendChild(projectTitleInput);
 
     const submit = document.createElement('button');
