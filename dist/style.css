@@ -38,6 +38,10 @@
     display: none;
 }
 
+.todo-completed {
+    text-decoration: line-through;
+}
+
 .high-priority {
     background-color: red;
 }

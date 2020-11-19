@@ -112,7 +112,7 @@ const removeToDoForm = (content, form) => {
 }
 
 //Function to render todo on page
-const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex) => {
+const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex, status) => {
     //variableDOM convention used to indicate that these are elements rendered in DOM tree,
     //rather than the variables used in the app's logic
 
@@ -128,6 +128,10 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex) 
         toDoDOM.classList.add('medium-priority');
     } else if(priority == 'High priority'){
         toDoDOM.classList.add('high-priority');
+    }
+
+    if (status){
+        toDoDOM.classList.add('todo-completed');
     }
 
     const todoTopRow = document.createElement('div');
@@ -243,4 +247,14 @@ const editToDo = (todoDOM, title, description, dueDate, priority) => {
     }
 }
 
-export {showToDoForm, removeToDoForm, renderToDo, expandToDo, editToDo};
+const toggleTodoStatusClass = (todoDOM) => {
+    //This function toggles the class used to style a todo as completed
+    todoDOM.classList.toggle('todo-completed');
+}
+
+export { showToDoForm , 
+         removeToDoForm , 
+         renderToDo , 
+         expandToDo , 
+         editToDo,
+         toggleTodoStatusClass };

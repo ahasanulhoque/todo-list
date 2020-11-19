@@ -9,7 +9,7 @@ const toDo = (title, description, dueDate, priority) => {
 };
 
 const toggleStatus = (status) => {
-    status = !status;
+     return !status;
 }
 
 

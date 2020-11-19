@@ -2,7 +2,7 @@ import {renderSidebar, renderMain, renderPage} from './render-page.js'
 import {Project, deleteToDo, deleteProject} from './project-logic.js'
 import {toDo, toggleStatus} from './todo-logic.js';
 import { showProjectForm , updateProjectName } from './render-project.js'
-import {showToDoForm, removeToDoForm, renderToDo, expandToDo, editToDo} from './render-todo.js'
+import {showToDoForm, removeToDoForm, renderToDo, expandToDo, editToDo, toggleTodoStatusClass} from './render-todo.js'
 import { saveProjects , getProjects } from './storage-functions.js'
 
 const PageController = (() => {
@@ -17,9 +17,9 @@ const PageController = (() => {
 
     //Show the first project in the main view, and render each of its todos
     renderMain(content, projectsList[0].name, 0);
-    projectsList[0].todos.forEach((todo) => {
+    projectsList[0].todos.forEach((todo, index) => {
         renderToDo(document.querySelector('#todos-list'), todo.title, todo.description,
-                    todo.dueDate, todo.priority, 0);
+                    todo.dueDate, todo.priority, index, todo.status);
     });
 
     //Render the sidebar with all loaded projects
@@ -35,7 +35,8 @@ const PageController = (() => {
             renderMain(content, projectsList[click.dataset.index].name, click.dataset.index);
             projectsList[click.dataset.index].todos.forEach((todo) => {
                 renderToDo(document.querySelector('#todos-list'), todo.title, todo.description,
-                            todo.dueDate, todo.priority, projectsList[click.dataset.index].todos.indexOf(todo));
+                            todo.dueDate, todo.priority, projectsList[click.dataset.index].todos.indexOf(todo),
+                            todo.status);
             });
         } else if (click.id == 'new-project'){
 
@@ -110,7 +111,7 @@ const PageController = (() => {
 
                         //Render new todo on page
                         renderToDo(document.querySelector('#todos-list'), newToDo.title, newToDo.description, newToDo.dueDate,
-                                        newToDo.priority, projectsList[projectIndex].todos.indexOf(newToDo));
+                                        newToDo.priority, projectsList[projectIndex].todos.indexOf(newToDo), newToDo.status);
                         
                         //Save the new todo in localStorage
                         saveProjects('projectsList', projectsList);
@@ -151,7 +152,12 @@ const PageController = (() => {
             }
         } else if(button.getAttribute('class') == 'check-todo'){
             //projectsList[projectIndex].todos[button.getAttribute('data-index')].toggleStatus();
-            toggleStatus(projectsList[projectIndex].todos[button.getAttribute('data-index')].status);
+            projectsList[projectIndex].todos[button.getAttribute('data-index')].status = toggleStatus(projectsList[projectIndex].todos[button.getAttribute('data-index')].status);
+            toggleTodoStatusClass(document.querySelector('#todos-list').querySelector(`[data-index="${button.getAttribute('data-index')}"]`))
+
+            //Save todo status changes to localStorage
+            saveProjects('projectsList', projectsList);
+
             console.log(projectsList[projectIndex].todos[button.getAttribute('data-index')]);
         } else if(button.getAttribute('class') == 'delete-todo'){
             //Button to delete todos
@@ -167,7 +173,8 @@ const PageController = (() => {
 
             projectsList[projectIndex].todos.forEach((todo) => {
                 renderToDo(document.querySelector('#todos-list'), todo.title, todo.description,
-                            todo.dueDate, todo.priority, projectsList[projectIndex].todos.indexOf(todo));            
+                            todo.dueDate, todo.priority, projectsList[projectIndex].todos.indexOf(todo),
+                            todo.status);            
             });
 
             //Save projects to localStorage, with todo deleted
@@ -224,7 +231,7 @@ const PageController = (() => {
                 renderMain(content, projectsList[0].name, 0);
                 projectsList[0].todos.forEach((todo) => {
                     renderToDo(document.querySelector('#todos-list'), todo.title, todo.description,
-                                todo.dueDate, todo.priority, projectsList[0].todos.indexOf(todo));
+                                todo.dueDate, todo.priority, projectsList[0].todos.indexOf(todo), todo.status);
                 });
             } else {
                 //If projectsList is empty, remove the project from the full view but do not try
@@ -237,15 +244,3 @@ const PageController = (() => {
         }
     }
 })();
-
-/*
-11/16/20 NOTES:
-MOVE PAGECONTROLLER INTO ITS OWN MODULE?
-*/
-
-/*
-11/10/20 NOTES:
-STILL NEED TO ADD:
-LOCALSTORAGE
-DATE-FNS
-*/
