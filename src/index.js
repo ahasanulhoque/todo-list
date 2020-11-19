@@ -1,11 +1,12 @@
-import {renderSidebar, renderMain, renderPage} from './render-page.js'
+import {renderPage , renderSidebar , renderMain , removeForm } from './render-page.js'
 import {Project, deleteToDo, deleteProject} from './project-logic.js'
 import {toDo, toggleStatus} from './todo-logic.js';
 import { showProjectForm , updateProjectName } from './render-project.js'
-import {showToDoForm, removeToDoForm, renderToDo, expandToDo, editToDo, toggleTodoStatusClass} from './render-todo.js'
+import {showToDoForm, renderToDo, expandToDo, editToDo, toggleTodoStatusClass} from './render-todo.js'
 import { saveProjects , getProjects } from './storage-functions.js'
 
 const PageController = (() => {
+    //renderPage() runs immediately on page load
     const content = document.querySelector('#content');
     const sidebar = document.querySelector('#sidebar');
 
@@ -52,7 +53,7 @@ const PageController = (() => {
                 let newButton = f.target;
                 if (newButton.tagName == 'BUTTON'){
                     //If either button is clicked, remove the form
-                    removeToDoForm(content, form);
+                    removeForm(content, form);
 
                     //If form is submitted, add a project
                     if (newButton.id == 'submit-project'){
@@ -96,7 +97,7 @@ const PageController = (() => {
                 let newButton = f.target;
                 if (newButton.tagName == 'BUTTON'){
                     //If submit or cancel button is selected, remove the form
-                    removeToDoForm(content,form);
+                    removeForm(content,form);
                     if (newButton.id == 'submit-todo'){
                         //If todo form is submitted instead of canceled
                         //create new todo object
@@ -129,7 +130,7 @@ const PageController = (() => {
                 let newButton = f.target;
                 if (newButton.tagName == 'BUTTON'){
                     //If submit or cancel button is selected, remove the form
-                    removeToDoForm(content,form);
+                    removeForm(content,form);
                     if (newButton.id == 'submit-todo'){
                         //If todo form is submitted instead of canceled
                         //Update  todo object
@@ -190,7 +191,7 @@ const PageController = (() => {
                 let newButton = f.target;
                 if (newButton.tagName == 'BUTTON'){
                     //If either button is clicked, remove the form
-                    removeToDoForm(content, form);
+                    removeForm(content, form);
 
                     //If form is submitted, edit the project
                     if (newButton.id == 'submit-project'){

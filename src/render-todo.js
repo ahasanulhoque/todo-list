@@ -57,7 +57,7 @@ const showToDoForm = (content, action) => {
     priorityInputLow.setAttribute('name', 'priority');
     priorityInputLow.setAttribute('type', 'radio');
     priorityInputLow.setAttribute('value', 'Low priority');
-    priorityWrapper.appendChild(priorityInputLow)
+    priorityWrapper.appendChild(priorityInputLow);
 
     const priorityLabelLow = document.createElement('label');
     priorityLabelLow.setAttribute('for', 'low-priority');
@@ -103,11 +103,6 @@ const showToDoForm = (content, action) => {
     newForm.appendChild(cancel);
 
     content.appendChild(newForm);
-}
-
-//Function to remove form when it is submitted or canceled
-const removeToDoForm = (content, form) => {
-    content.removeChild(form);
 }
 
 //Function to render todo on page
@@ -256,8 +251,7 @@ const toggleTodoStatusClass = (todoDOM) => {
     todoDOM.classList.toggle('todo-completed');
 }
 
-export { showToDoForm , 
-         removeToDoForm , 
+export { showToDoForm ,  
          renderToDo , 
          expandToDo , 
          editToDo,

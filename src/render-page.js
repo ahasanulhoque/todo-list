@@ -1,3 +1,30 @@
+//Below function is immediately executed to load on page load
+const renderPage = (() => {
+    const content = document.querySelector('#content');
+
+    const sidebar = document.createElement('section');
+    sidebar.id = 'sidebar';
+
+    const sidebarTopWrapper = document.createElement('div');
+    sidebarTopWrapper.id = 'sidebar-top-wrapper'
+
+    const sidebarTitle = document.createElement('h2');
+    sidebarTitle.innerHTML = 'Projects'
+    sidebarTopWrapper.appendChild(sidebarTitle);
+
+    const newProject = document.createElement('button');
+    newProject.innerHTML = 'New Project';
+    newProject.id = 'new-project';
+    sidebarTopWrapper.appendChild(newProject);
+
+    const sidebarListOfProjects = document.createElement('section');
+    sidebarListOfProjects.id = 'projects-list';
+
+    sidebar.appendChild(sidebarTopWrapper);
+    sidebar.appendChild(sidebarListOfProjects);
+    content.appendChild(sidebar);
+})();
+
 const renderSidebar = (projectName, index) => {
     //render the sidebar
     //should have project titles
@@ -74,32 +101,9 @@ const renderMain = (content, projectTitle, index) => {
     content.appendChild(projectMainDOM);
 }
 
+//Function to remove form when it is submitted or canceled
+const removeForm = (content, form) => {
+    content.removeChild(form);
+}
 
-//Below function is immediately executed to load on page load
-const renderPage = (() => {
-    const content = document.querySelector('#content');
-
-    const sidebar = document.createElement('section');
-    sidebar.id = 'sidebar';
-
-    const sidebarTopWrapper = document.createElement('div');
-    sidebarTopWrapper.id = 'sidebar-top-wrapper'
-
-    const sidebarTitle = document.createElement('h2');
-    sidebarTitle.innerHTML = 'Projects'
-    sidebarTopWrapper.appendChild(sidebarTitle);
-
-    const newProject = document.createElement('button');
-    newProject.innerHTML = 'New Project';
-    newProject.id = 'new-project';
-    sidebarTopWrapper.appendChild(newProject);
-
-    const sidebarListOfProjects = document.createElement('section');
-    sidebarListOfProjects.id = 'projects-list';
-
-    sidebar.appendChild(sidebarTopWrapper);
-    sidebar.appendChild(sidebarListOfProjects);
-    content.appendChild(sidebar);
-})();
-
-export {renderSidebar, renderMain, renderPage};
+export { renderPage, renderSidebar , renderMain , removeForm };
