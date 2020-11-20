@@ -15,11 +15,12 @@ const showProjectForm = (content, action, existingValue) => {
     projectTitleInput.setAttribute('name', 'project-title');
     projectTitleInput.setAttribute('type', 'text');
     projectTitleInput.setAttribute('placeholder', 'Project Title');
+    projectTitleInput.setAttribute('required', '');
     if (existingValue) {projectTitleInput.setAttribute('value', existingValue);}
     projectForm.appendChild(projectTitleInput);
 
     const submit = document.createElement('button');
-    submit.setAttribute('type', 'button');
+    submit.setAttribute('type', 'submit');
     submit.id = 'submit-project';
     submit.innerHTML = `${action} Project`;
     projectForm.appendChild(submit);

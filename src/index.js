@@ -47,33 +47,30 @@ const PageController = (() => {
             showProjectForm(content, 'Add');
             //Select the form now shown on screen
             let form = document.querySelector('form');
+            
+            form.onsubmit = (submission) => {
+                //If form is submitted, remove the form and create a new Project object
+                submission.preventDefault();      //This prevents page from refreshing
+                removeForm(content, form);
+                let newProject = Project(form.elements.namedItem('project-title').value);
 
-            //Listen for clicks to add a project, or cancel the project form
-            form.onclick = function(f){
-                let newButton = f.target;
-                if (newButton.tagName == 'BUTTON'){
-                    //If either button is clicked, remove the form
-                    removeForm(content, form);
+                //Push to projectsList array and test if working
+                projectsList.push(newProject);
 
-                    //If form is submitted, add a project
-                    if (newButton.id == 'submit-project'){
-                        let newProject = Project(form.elements.namedItem('project-title').value);
-
-                        //Push to projectsList array and test if working
-                        projectsList.push(newProject);
-
-                        //Add new project to sidebar
-                        renderSidebar(newProject.name, projectsList.indexOf(newProject));
+                //Add new project to sidebar
+                renderSidebar(newProject.name, projectsList.indexOf(newProject));
                         
-                        //Render the project in full
-                        renderMain(content, newProject.name, projectsList.indexOf(newProject));
+                //Render the project in full
+                renderMain(content, newProject.name, projectsList.indexOf(newProject));
                         
-                        //Save the project to localStorage
-                        saveProjects('projectsList', projectsList);
-                    }
-                }
+                //Save the project to localStorage
+                saveProjects('projectsList', projectsList);
             }
 
+            document.querySelector('#cancel-project').onclick = () => {
+                //Close the form modal if user chooses the cancel button
+                removeForm(content, form);
+            }
         }
     }
 
@@ -122,8 +119,10 @@ const PageController = (() => {
         } else if(button.getAttribute('class') == 'expand-todo'){
             expandToDo(document.querySelector('#todos-list').querySelector(`[data-index="${button.getAttribute('data-index')}"]`));
         } else if(button.getAttribute('class') == 'edit-todo'){
-            //Show edit form and then pass values to todo object
-            showToDoForm(content, 'Edit');
+            //Show edit form, pass existing values to pre-populate the form
+            showToDoForm(content, 'Edit', projectsList[projectIndex].todos[button.getAttribute('data-index')].title,
+                        projectsList[projectIndex].todos[button.getAttribute('data-index')].description,
+                        projectsList[projectIndex].todos[button.getAttribute('data-index')].dueDate);
             let form = document.querySelector('form');
 
             form.onclick = function(f){
@@ -186,35 +185,27 @@ const PageController = (() => {
             //Select the form now shown on screen
             let form = document.querySelector('form');
 
-            //Listen for clicks to add a project, or cancel the project form
-            form.onclick = function(f){
-                let newButton = f.target;
-                if (newButton.tagName == 'BUTTON'){
-                    //If either button is clicked, remove the form
-                    removeForm(content, form);
+            form.onsubmit = (submission) => {
+                //If form is submitted, remove the form and edit the chosen Project object
+                submission.preventDefault();      //This prevents page from refreshing
+                removeForm(content, form);
+                projectsList[projectIndex].name = form.elements.namedItem('project-title').value;
 
-                    //If form is submitted, edit the project
-                    if (newButton.id == 'submit-project'){
-                        //Change the selected project's name
-                        projectsList[projectIndex].name = form.elements.namedItem('project-title').value;
-
-                        //Delete projects from sidebar and render sidebar again
-                        /*document.querySelector('#sidebar').querySelectorAll('.project-sidebar').forEach(n => n.remove());
-                        projectsList.forEach((project, index) => {
-                            renderSidebar(project.name, index)
-                        });*/
-
-                        //Change the project name in the sidebar
-                        updateProjectName(document.querySelector('#sidebar').querySelector(`[data-index="${projectIndex}"]`).querySelector('h3'), projectsList[projectIndex].name);
+                //Change the project name in the sidebar
+                updateProjectName(document.querySelector('#sidebar').querySelector(`[data-index="${projectIndex}"]`), projectsList[projectIndex].name);
                         
-                        //Change the project name in full project view in DOM
-                        updateProjectName(document.querySelector('#project-top-row').querySelector('h2'), projectsList[projectIndex].name);
+                //Change the project name in full project view in DOM
+                updateProjectName(document.querySelector('#project-top-row').querySelector('h2'), projectsList[projectIndex].name);
 
-                        //Save projects to localStorage, with project edited
-                        saveProjects('projectsList', projectsList);         
-                    }
-                }
+                //Save projects to localStorage, with project edited
+                saveProjects('projectsList', projectsList);
             }
+
+            document.querySelector('#cancel-project').onclick = () => {
+                //Close the form modal if user chooses the cancel button
+                removeForm(content, form);
+            }
+
         } else if(button.id == 'delete-project'){
             //Delete project from projectsList array
             deleteProject(projectsList, document.querySelector('#project-full').dataset.index);

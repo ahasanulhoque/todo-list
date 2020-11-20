@@ -6,7 +6,7 @@ import { format } from 'date-fns'
 //Show form on page
 //On click of submit button, return user values and close form
 
-const showToDoForm = (content, action) => {
+const showToDoForm = (content, action, existingTitle, existingDescription, existingDueDate) => {
     //action is a string, used to show either 'Add' or 'Edit' on the form, according to
     //what was clicked
 
@@ -26,6 +26,7 @@ const showToDoForm = (content, action) => {
     titleInput.setAttribute('name', 'todo-title');
     titleInput.setAttribute('type', 'text');
     titleInput.setAttribute('placeholder', 'ToDo Title');
+    if (existingTitle) {titleInput.setAttribute('value', existingTitle);}
     newForm.appendChild(titleInput);
     
     const descriptionLabel = document.createElement('label');
@@ -37,6 +38,7 @@ const showToDoForm = (content, action) => {
     descriptionInput.setAttribute('name', 'description');
     descriptionInput.setAttribute('type', 'text');
     descriptionInput.setAttribute('placeholder', 'ToDo Description');
+    if (existingDescription) {descriptionInput.setAttribute('value', existingDescription);}
     newForm.appendChild(descriptionInput);
 
     const dateLabel = document.createElement('label');
@@ -47,6 +49,7 @@ const showToDoForm = (content, action) => {
     const dateInput = document.createElement('input');
     dateInput.setAttribute('name', 'date');
     dateInput.setAttribute('type', 'date');
+    if (existingDueDate) {dateInput.setAttribute('value', existingDueDate);}
     newForm.appendChild(dateInput);
 
     const priorityWrapper = document.createElement('div');
@@ -97,7 +100,7 @@ const showToDoForm = (content, action) => {
     newForm.appendChild(submit);
 
     const cancel = document.createElement('button');
-    cancel.setAttribute('type', 'button');
+    cancel.setAttribute('type', 'submit');
     cancel.id = 'cancel-todo';
     cancel.innerHTML = 'Cancel';
     newForm.appendChild(cancel);
