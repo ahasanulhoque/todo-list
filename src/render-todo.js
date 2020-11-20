@@ -26,6 +26,7 @@ const showToDoForm = (content, action, existingTitle, existingDescription, exist
     titleInput.setAttribute('name', 'todo-title');
     titleInput.setAttribute('type', 'text');
     titleInput.setAttribute('placeholder', 'ToDo Title');
+    titleInput.setAttribute('required', '');
     if (existingTitle) {titleInput.setAttribute('value', existingTitle);}
     newForm.appendChild(titleInput);
     
@@ -49,6 +50,7 @@ const showToDoForm = (content, action, existingTitle, existingDescription, exist
     const dateInput = document.createElement('input');
     dateInput.setAttribute('name', 'date');
     dateInput.setAttribute('type', 'date');
+    dateInput.setAttribute('required', '');
     if (existingDueDate) {dateInput.setAttribute('value', existingDueDate);}
     newForm.appendChild(dateInput);
 
@@ -94,13 +96,13 @@ const showToDoForm = (content, action, existingTitle, existingDescription, exist
     newForm.appendChild(priorityWrapper);
 
     const submit = document.createElement('button');
-    submit.setAttribute('type', 'button');
+    submit.setAttribute('type', 'submit');
     submit.id = 'submit-todo';
     submit.innerHTML = `${action} Todo`;
     newForm.appendChild(submit);
 
     const cancel = document.createElement('button');
-    cancel.setAttribute('type', 'submit');
+    cancel.setAttribute('type', 'button');
     cancel.id = 'cancel-todo';
     cancel.innerHTML = 'Cancel';
     newForm.appendChild(cancel);
@@ -193,7 +195,6 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex, 
     descriptionDOM.innerHTML = description;
     todoDetails.appendChild(descriptionDOM);
 
-    //May need to take priorityDOM out if it is not displayed on page
     const priorityDOM = document.createElement('p');
     priorityDOM.classList.add('todo-priority');
     priorityDOM.innerHTML = priority;
@@ -228,7 +229,7 @@ const editToDo = (todoDOM, title, description, dueDate, priority) => {
     descriptionDOM.innerHTML = description;
 
     let dueDateDOM = todoDOM.querySelector('.todo-due-date');
-    dueDateDOM.innerHTML = dueDate;
+    dueDateDOM.innerHTML = format(Date.UTC(dueDate.slice(0,4), dueDate.slice(5,7)-1, dueDate.slice(8,10))+86400000, 'MM/dd/yyyy');
 
     let priorityDOM = todoDOM.querySelector('.todo-priority');
     priorityDOM.innerHTML = priority;

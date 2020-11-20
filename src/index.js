@@ -89,33 +89,33 @@ const PageController = (() => {
             //Select the form now shown on screen
             let form = document.querySelector('form');
 
-            //Listen for clicks on new todo form, for submit or cancel buttons
-            form.onclick = function(f){
-                let newButton = f.target;
-                if (newButton.tagName == 'BUTTON'){
-                    //If submit or cancel button is selected, remove the form
-                    removeForm(content,form);
-                    if (newButton.id == 'submit-todo'){
-                        //If todo form is submitted instead of canceled
-                        //create new todo object
-                        let newToDo = toDo(form.elements.namedItem('todo-title').value,
-                                            form.elements.namedItem('description').value,
-                                            form.elements.namedItem('date').value,
-                                            form.elements.namedItem('priority').value);
-                        
-                        //Push to projects todos array by finding the correct project using the displayed
-                        //project's data-index
-                        projectsList[projectIndex].todos.push(newToDo);
+            form.onsubmit = (submission) => {
+                //If form is submitted, remove the form and create a new Todo object
+                submission.preventDefault();      //This prevents page from refreshing
+                removeForm(content, form);
 
-                        //Render new todo on page
-                        renderToDo(document.querySelector('#todos-list'), newToDo.title, newToDo.description, newToDo.dueDate,
-                                        newToDo.priority, projectsList[projectIndex].todos.indexOf(newToDo), newToDo.status);
+                let newToDo = toDo(form.elements.namedItem('todo-title').value,
+                                    form.elements.namedItem('description').value,
+                                    form.elements.namedItem('date').value,
+                                    form.elements.namedItem('priority').value);
                         
-                        //Save the new todo in localStorage
-                        saveProjects('projectsList', projectsList);
-                    }
-                }
+                //Push to projects todos array by finding the correct project using the displayed
+                //project's data-index
+                projectsList[projectIndex].todos.push(newToDo);
+
+                //Render new todo on page
+                renderToDo(document.querySelector('#todos-list'), newToDo.title, newToDo.description, newToDo.dueDate,
+                            newToDo.priority, projectsList[projectIndex].todos.indexOf(newToDo), newToDo.status);
+                        
+                //Save the new todo in localStorage
+                saveProjects('projectsList', projectsList)
             }
+
+            document.querySelector('#cancel-todo').onclick = () => {
+                //Close the form modal if user chooses the cancel button
+                removeForm(content, form);
+            }
+
         } else if(button.getAttribute('class') == 'expand-todo'){
             expandToDo(document.querySelector('#todos-list').querySelector(`[data-index="${button.getAttribute('data-index')}"]`));
         } else if(button.getAttribute('class') == 'edit-todo'){
@@ -125,31 +125,33 @@ const PageController = (() => {
                         projectsList[projectIndex].todos[button.getAttribute('data-index')].dueDate);
             let form = document.querySelector('form');
 
-            form.onclick = function(f){
-                let newButton = f.target;
-                if (newButton.tagName == 'BUTTON'){
-                    //If submit or cancel button is selected, remove the form
-                    removeForm(content,form);
-                    if (newButton.id == 'submit-todo'){
-                        //If todo form is submitted instead of canceled
-                        //Update  todo object
-                        projectsList[projectIndex].todos[button.getAttribute('data-index')].title = form.elements.namedItem('todo-title').value;
-                        projectsList[projectIndex].todos[button.getAttribute('data-index')].description = form.elements.namedItem('description').value;
-                        projectsList[projectIndex].todos[button.getAttribute('data-index')].dueDate = form.elements.namedItem('date').value;
-                        projectsList[projectIndex].todos[button.getAttribute('data-index')].priority = form.elements.namedItem('priority').value;
+            form.onsubmit = (submission) => {
+                //If form is submitted, remove the form and create a new Todo object
+                submission.preventDefault();      //This prevents page from refreshing
+                removeForm(content, form);
 
-                        //Edit todo DOM object
-                        editToDo(document.querySelector('#todos-list').querySelector(`[data-index="${button.getAttribute('data-index')}"]`),
-                                 projectsList[projectIndex].todos[button.getAttribute('data-index')].title = form.elements.namedItem('todo-title').value,
-                                 projectsList[projectIndex].todos[button.getAttribute('data-index')].description = form.elements.namedItem('description').value,
-                                 projectsList[projectIndex].todos[button.getAttribute('data-index')].dueDate = form.elements.namedItem('date').value,
-                                 projectsList[projectIndex].todos[button.getAttribute('data-index')].priority = form.elements.namedItem('priority').value);
+                //Update  todo object when form is submitted
+                projectsList[projectIndex].todos[button.getAttribute('data-index')].title = form.elements.namedItem('todo-title').value;
+                projectsList[projectIndex].todos[button.getAttribute('data-index')].description = form.elements.namedItem('description').value;
+                projectsList[projectIndex].todos[button.getAttribute('data-index')].dueDate = form.elements.namedItem('date').value;
+                projectsList[projectIndex].todos[button.getAttribute('data-index')].priority = form.elements.namedItem('priority').value;
 
-                        //Save edited todo in localStorage
-                        saveProjects('projectsList', projectsList);
-                    }
-                }
+                //Edit todo DOM object
+                editToDo(document.querySelector('#todos-list').querySelector(`[data-index="${button.getAttribute('data-index')}"]`),
+                         projectsList[projectIndex].todos[button.getAttribute('data-index')].title = form.elements.namedItem('todo-title').value,
+                         projectsList[projectIndex].todos[button.getAttribute('data-index')].description = form.elements.namedItem('description').value,
+                         projectsList[projectIndex].todos[button.getAttribute('data-index')].dueDate = form.elements.namedItem('date').value,
+                         projectsList[projectIndex].todos[button.getAttribute('data-index')].priority = form.elements.namedItem('priority').value);
+
+                //Save edited todo in localStorage
+                saveProjects('projectsList', projectsList);
             }
+
+            document.querySelector('#cancel-todo').onclick = () => {
+                //Close the form modal if user chooses the cancel button
+                removeForm(content, form);
+            }
+
         } else if(button.getAttribute('class') == 'check-todo'){
             //projectsList[projectIndex].todos[button.getAttribute('data-index')].toggleStatus();
             projectsList[projectIndex].todos[button.getAttribute('data-index')].status = toggleStatus(projectsList[projectIndex].todos[button.getAttribute('data-index')].status);
