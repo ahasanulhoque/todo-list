@@ -144,6 +144,7 @@ html, body {
 
 .expand-todo {
     background: hsl(210, 100%, 60%);
+    width: 2rem;
 }
 
 .expand-todo:hover {
