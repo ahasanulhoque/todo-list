@@ -121,7 +121,7 @@ html, body {
 
 #new-todo {
     height: 2rem;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bolder;
     background: hsl(210, 100%, 60%);   
     color: white;
@@ -168,7 +168,7 @@ html, body {
 .delete-button {
     width: 2rem;
     height: 2rem;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bolder;
     background: hsl(0, 100%, 30%);
     color: white;
