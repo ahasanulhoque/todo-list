@@ -76,7 +76,7 @@ const renderMain = (content, projectTitle, index) => {
     editProjectButton.id = 'edit-project';
     editProjectButton.classList.add('edit-button');
     editProjectButton.setAttribute('title', 'Edit Project');
-    editProjectButton.innerHTML = '\u270e';
+    editProjectButton.innerHTML = 'Edit Project';
     projectButtonWrapper.appendChild(editProjectButton);
 
     const deleteProjectButton = document.createElement('button');

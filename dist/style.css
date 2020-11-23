@@ -135,19 +135,34 @@ html, body {
 .expand-todo,
 .edit-button,
 .check-todo {
-    width: 2rem;
     height: 2rem;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bolder;
-    background: hsl(60, 19%, 25%);    
     color: white;
     border: thin;
 }
 
-.expand-todo:hover,
-.edit-button:hover,
-.check-todo:hover {
+.expand-todo {
+    background: hsl(210, 100%, 60%);
+}
+
+.expand-todo:hover {
+    background: hsl(210, 100%, 75%);
+}
+.edit-button {
+    background: hsl(60, 19%, 25%);
+}
+
+.edit-button:hover {
     background: hsl(60, 19%, 40%);
+}
+
+.check-todo {
+    background: hsl(260, 100%, 70%);
+}
+
+.check-todo:hover {
+    background: hsl(260, 100%, 85%)
 }
 
 .delete-button {

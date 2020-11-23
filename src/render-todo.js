@@ -167,14 +167,14 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex, 
     editButton.classList.add('edit-button');
     editButton.setAttribute('title', 'Edit Todo');
     editButton.dataset.index = todoIndex;
-    editButton.innerHTML = '\u270e';
+    editButton.innerHTML = 'Edit';
     todoButtons.appendChild(editButton);
 
     const checkButton = document.createElement('button');
     checkButton.classList.add('check-todo');
     checkButton.setAttribute('title', 'Change Todo Status');
     checkButton.dataset.index = todoIndex;
-    checkButton.innerHTML = '\u2713';
+    checkButton.innerHTML = 'Complete?';
     todoButtons.appendChild(checkButton);
 
     const deleteButton = document.createElement('button');
