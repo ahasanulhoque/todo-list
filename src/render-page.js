@@ -36,11 +36,6 @@ const renderSidebar = (projectName, index) => {
     projectSide.classList.add('project-sidebar');
     projectSide.innerHTML = projectName;
 
-    /*const projectSideName = document.createElement('h3');
-    projectSideName.dataset.index = index;
-    projectSideName.innerHTML = projectName;
-
-    projectSide.appendChild(projectSideName);*/
     sidebarListOfProjects.appendChild(projectSide);
 }
 
@@ -74,17 +69,19 @@ const renderMain = (content, projectTitle, index) => {
 
     const newToDo = document.createElement('button');
     newToDo.innerHTML = 'New Todo';
-    newToDo.id = 'new-to-do';
+    newToDo.id = 'new-todo';
     projectButtonWrapper.appendChild(newToDo);
 
     const editProjectButton = document.createElement('button');
     editProjectButton.id = 'edit-project';
+    editProjectButton.classList.add('edit-button');
     editProjectButton.setAttribute('title', 'Edit Project');
     editProjectButton.innerHTML = '\u270e';
     projectButtonWrapper.appendChild(editProjectButton);
 
     const deleteProjectButton = document.createElement('button');
     deleteProjectButton.id = 'delete-project';
+    deleteProjectButton.classList.add('delete-button');
     deleteProjectButton.setAttribute('title', 'Delete Project');
     deleteProjectButton.innerHTML = 'X';
     projectButtonWrapper.appendChild(deleteProjectButton);

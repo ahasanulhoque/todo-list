@@ -164,6 +164,7 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex, 
 
     const editButton = document.createElement('button');
     editButton.classList.add('edit-todo');
+    editButton.classList.add('edit-button');
     editButton.setAttribute('title', 'Edit Todo');
     editButton.dataset.index = todoIndex;
     editButton.innerHTML = '\u270e';
@@ -178,6 +179,7 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex, 
 
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('delete-todo');
+    deleteButton.classList.add('delete-button');
     deleteButton.setAttribute('title', 'Delete Todo');
     deleteButton.dataset.index = todoIndex;
     deleteButton.innerHTML = 'X'

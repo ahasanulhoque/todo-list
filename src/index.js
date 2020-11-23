@@ -82,7 +82,7 @@ const PageController = (() => {
         //Location of the selected project in the projects array, used in several of below if statements
         let projectIndex = document.querySelector('#project-full').getAttribute('data-index');
 
-        if (button.id == 'new-to-do'){
+        if (button.id == 'new-todo'){
             //Call a form function from a render module
             showToDoForm(content, 'Add');
 
@@ -116,9 +116,9 @@ const PageController = (() => {
                 removeForm(content, form);
             }
 
-        } else if(button.getAttribute('class') == 'expand-todo'){
+        } else if(button.classList.contains('expand-todo')){
             expandToDo(document.querySelector('#todos-list').querySelector(`[data-index="${button.getAttribute('data-index')}"]`));
-        } else if(button.getAttribute('class') == 'edit-todo'){
+        } else if(button.classList.contains('edit-todo')){
             //Show edit form, pass existing values to pre-populate the form
             showToDoForm(content, 'Edit', projectsList[projectIndex].todos[button.getAttribute('data-index')].title,
                         projectsList[projectIndex].todos[button.getAttribute('data-index')].description,
@@ -152,14 +152,14 @@ const PageController = (() => {
                 removeForm(content, form);
             }
 
-        } else if(button.getAttribute('class') == 'check-todo'){
+        } else if(button.classList.contains('check-todo')){
             //projectsList[projectIndex].todos[button.getAttribute('data-index')].toggleStatus();
             projectsList[projectIndex].todos[button.getAttribute('data-index')].status = toggleStatus(projectsList[projectIndex].todos[button.getAttribute('data-index')].status);
             toggleTodoStatusClass(document.querySelector('#todos-list').querySelector(`[data-index="${button.getAttribute('data-index')}"]`))
 
             //Save todo status changes to localStorage
             saveProjects('projectsList', projectsList);
-        } else if(button.getAttribute('class') == 'delete-todo'){
+        } else if(button.classList.contains('delete-todo')){
             //Button to delete todos
 
             //First, remove the deleted todo from its project's todos array
