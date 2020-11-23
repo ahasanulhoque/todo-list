@@ -1,6 +1,18 @@
 html, body {
     margin: 0;
     padding: 0;
+    font-family: 'Trebuchet MS', Helvetica, sans-serif;
+    font-size: 18px;
+    background: #f2f2f2;
+}
+
+#header {
+    height: 7vh;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: solid thin;
 }
 
 #content {
@@ -8,14 +20,32 @@ html, body {
 }
 
 #sidebar {
-    height: 100vh;
+    height: 93vh;
     width: 20vw;
-    border-right: solid;
+    border-right: solid thin;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+#sidebar-top-wrapper {
+    text-align: center;
+}
+
+#new-project {
+    background: hsl(140, 100%, 30%);
+    color: white;
+    height: 2rem;
+    font-size: 1.2rem;
+    font-weight: bolder;
+    border: thin;
+}
+
+#new-project:hover {
+    background: hsl(140, 100%, 45%);
+}
+
+/*Styling for list of projects in the sidebar*/
 #projects-list {
     width: 20vw;
     border-top: solid thin;
@@ -24,13 +54,24 @@ html, body {
     flex-direction: column;
 }
 
+/*Styling for the buttons in the sidebar*/
 .project-sidebar {
     height: 2rem;
+    color: white;
     font-weight: bolder;
+    border: none;
+    background: hsl(60, 20%, 30%);
 }
 
+.project-sidebar:hover {
+    background: hsl(60, 20%, 45%)
+}
+
+/* #project-full through .low-priority styles the full display of a project
+   and its todos*/
+
 #project-full {
-    padding: 1.5rem;
+    padding: 0rem 1.5rem;
     width: 80%;
 }
 
@@ -42,8 +83,7 @@ html, body {
 
 .todo {
     border: solid thin;
-    padding-left: 0.3rem;
-    padding-right: 0.3rem;
+    padding: 0rem 0.3rem;
 }
 
 .todo-top-row {
@@ -62,19 +102,70 @@ html, body {
 
 .todo-completed {
     text-decoration: line-through;
+    color: hsl(0, 0%, 30%)
 }
 
 .high-priority {
-    background-color: red;
+    background-color: #ff8080;
 }
 
 .medium-priority {
-    background-color: yellow;
+    background-color: #ffff66;
 }
 
 .low-priority {
-    background-color: green;
+    background: #66ff66;
 }
+
+/*Styling of buttons that change or delete projects and todos*/
+
+#new-todo {
+    height: 2rem;
+    font-size: 1.2rem;
+    font-weight: bolder;
+    background: hsl(210, 100%, 60%);   
+    color: white;
+    border: thin;
+}
+
+#new-todo:hover {
+    background: hsl(210, 100%, 75%);
+}
+
+.expand-todo,
+.edit-button,
+.check-todo {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.2rem;
+    font-weight: bolder;
+    background: hsl(60, 19%, 25%);    
+    color: white;
+    border: thin;
+}
+
+.expand-todo:hover,
+.edit-button:hover,
+.check-todo:hover {
+    background: hsl(60, 19%, 40%);
+}
+
+.delete-button {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.2rem;
+    font-weight: bolder;
+    background: hsl(0, 100%, 30%);
+    color: white;
+    border: thin;
+}
+
+.delete-button:hover {
+    background: hsl(0, 100%, 45%);
+}
+
+
+/*Styling of the forms*/
 
 #project-form {
     height: 30vh;
@@ -87,6 +178,7 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: hsla(0, 0%, 100%, 1);
 }
 
 #todo-form {
@@ -100,4 +192,5 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: hsla(0, 0%, 100%, 1);
 }
