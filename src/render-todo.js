@@ -6,7 +6,7 @@ import { format } from 'date-fns'
 //Show form on page
 //On click of submit button, return user values and close form
 
-const showToDoForm = (content, action, existingTitle, existingDescription, existingDueDate) => {
+const showToDoForm = (content, action, existingTitle, existingDescription, existingDueDate, existingPriority) => {
     //action is a string, used to show either 'Add' or 'Edit' on the form, according to
     //what was clicked
 
@@ -62,6 +62,7 @@ const showToDoForm = (content, action, existingTitle, existingDescription, exist
     priorityInputLow.setAttribute('name', 'priority');
     priorityInputLow.setAttribute('type', 'radio');
     priorityInputLow.setAttribute('value', 'Low priority');
+    if (existingPriority == 'Low priority') {priorityInputLow.setAttribute('checked', '');}
     priorityWrapper.appendChild(priorityInputLow);
 
     const priorityLabelLow = document.createElement('label');
@@ -74,6 +75,7 @@ const showToDoForm = (content, action, existingTitle, existingDescription, exist
     priorityInputMedium.setAttribute('name', 'priority');
     priorityInputMedium.setAttribute('type', 'radio');
     priorityInputMedium.setAttribute('value', 'Medium priority');
+    if (existingPriority == 'Medium priority') {priorityInputMedium.setAttribute('checked', '');}
     priorityWrapper.appendChild(priorityInputMedium)
 
     const priorityLabelMedium = document.createElement('label');
@@ -86,6 +88,7 @@ const showToDoForm = (content, action, existingTitle, existingDescription, exist
     priorityInputHigh.setAttribute('name', 'priority');
     priorityInputHigh.setAttribute('type', 'radio');
     priorityInputHigh.setAttribute('value', 'High priority');
+    if (existingPriority == 'High priority') {priorityInputHigh.setAttribute('checked', '');}
     priorityWrapper.appendChild(priorityInputHigh)
 
     const priorityLabelHigh = document.createElement('label');

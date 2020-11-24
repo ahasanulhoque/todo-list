@@ -122,7 +122,8 @@ const PageController = (() => {
             //Show edit form, pass existing values to pre-populate the form
             showToDoForm(content, 'Edit', projectsList[projectIndex].todos[button.getAttribute('data-index')].title,
                         projectsList[projectIndex].todos[button.getAttribute('data-index')].description,
-                        projectsList[projectIndex].todos[button.getAttribute('data-index')].dueDate);
+                        projectsList[projectIndex].todos[button.getAttribute('data-index')].dueDate,
+                        projectsList[projectIndex].todos[button.getAttribute('data-index')].priority);
             let form = document.querySelector('form');
 
             form.onsubmit = (submission) => {
