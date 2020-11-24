@@ -236,13 +236,14 @@ html, body {
 
 @media screen
     and (orientation: portrait){
+
     #content {
         display: flex;
         flex-direction: column;
     }
 
     #sidebar {
-        height: 15vh;
+        height: 25vh;
         width: 100vw;
         border-bottom: groove thin;
         display: flex;
@@ -253,7 +254,7 @@ html, body {
 
     #sidebar-top-wrapper {
         display: flex;
-        width: 30vw;
+        width: 80vw;
         justify-content: space-between;
         align-items: center;
     }
@@ -266,11 +267,41 @@ html, body {
     }
 
     .project-sidebar {
-        height: 5rem;
-        font-size: 1.5rem;
+        font-size: 1rem;
     }
 
     #project-full {
-        width: 95vw;
+        padding-top: 1rem;
+        width: 90vw;
+        font-size: 0.75rem;
+    }
+
+    #new-todo,
+    .edit-button,
+    .check-todo {
+        height: 1rem;
+        font-size: 0.5rem;
+    }
+
+    .expand-todo,
+    .delete-button {
+        height: 1rem;
+        width: 1rem;
+        font-size: 0.5rem;
+    }
+
+    #project-buttons,
+    .todo-buttons {
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+    }
+
+    #project-form,
+    #todo-form {
+        width: 100vw;
+        left: 0;
+        right: 0;
+        border: thin;
     }
 }
