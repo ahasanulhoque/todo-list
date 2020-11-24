@@ -68,8 +68,9 @@ const renderMain = (content, projectTitle, index) => {
     projectButtonWrapper.id = 'project-buttons';
 
     const newToDo = document.createElement('button');
-    newToDo.innerHTML = 'New Todo';
+    newToDo.innerHTML = 'New Task';
     newToDo.id = 'new-todo';
+    newToDo.setAttribute('title', 'New task');
     projectButtonWrapper.appendChild(newToDo);
 
     const editProjectButton = document.createElement('button');

@@ -14,31 +14,31 @@ const showToDoForm = (content, action, existingTitle, existingDescription, exist
     newForm.id = 'todo-form';
 
     const toDoTitle = document.createElement('h3');
-    toDoTitle.innerHTML = `${action} Todo`;
+    toDoTitle.innerHTML = `${action} Task`;
     newForm.appendChild(toDoTitle);
 
     const titleLabel = document.createElement('label');
     titleLabel.setAttribute('for', 'todo-title');
-    titleLabel.innerHTML = 'ToDo Title';
+    titleLabel.innerHTML = 'Task title';
     newForm.appendChild(titleLabel);
 
     const titleInput = document.createElement('input');
     titleInput.setAttribute('name', 'todo-title');
     titleInput.setAttribute('type', 'text');
-    titleInput.setAttribute('placeholder', 'ToDo Title');
+    titleInput.setAttribute('placeholder', 'Task Title');
     titleInput.setAttribute('required', '');
     if (existingTitle) {titleInput.setAttribute('value', existingTitle);}
     newForm.appendChild(titleInput);
     
     const descriptionLabel = document.createElement('label');
     descriptionLabel.setAttribute('for', 'description');
-    descriptionLabel.innerHTML = 'ToDo Description';
+    descriptionLabel.innerHTML = 'Task Description';
     newForm.appendChild(descriptionLabel);
 
     const descriptionInput = document.createElement('input');
     descriptionInput.setAttribute('name', 'description');
     descriptionInput.setAttribute('type', 'text');
-    descriptionInput.setAttribute('placeholder', 'ToDo Description');
+    descriptionInput.setAttribute('placeholder', 'Task Description');
     if (existingDescription) {descriptionInput.setAttribute('value', existingDescription);}
     newForm.appendChild(descriptionInput);
 
@@ -160,7 +160,7 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex, 
 
     const expandButton = document.createElement('button');
     expandButton.classList.add('expand-todo');
-    expandButton.setAttribute('title', 'Expand Todo');
+    expandButton.setAttribute('title', 'Expand task');
     expandButton.dataset.index = todoIndex;
     expandButton.innerHTML = '+';
     todoButtons.appendChild(expandButton);
@@ -168,14 +168,14 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex, 
     const editButton = document.createElement('button');
     editButton.classList.add('edit-todo');
     editButton.classList.add('edit-button');
-    editButton.setAttribute('title', 'Edit Todo');
+    editButton.setAttribute('title', 'Edit task');
     editButton.dataset.index = todoIndex;
     editButton.innerHTML = 'Edit';
     todoButtons.appendChild(editButton);
 
     const checkButton = document.createElement('button');
     checkButton.classList.add('check-todo');
-    checkButton.setAttribute('title', 'Change Todo Status');
+    checkButton.setAttribute('title', 'Change task status');
     checkButton.dataset.index = todoIndex;
     checkButton.innerHTML = 'Complete?';
     todoButtons.appendChild(checkButton);
@@ -183,7 +183,7 @@ const renderToDo = (toDosDOM, title, description, dueDate, priority, todoIndex, 
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('delete-todo');
     deleteButton.classList.add('delete-button');
-    deleteButton.setAttribute('title', 'Delete Todo');
+    deleteButton.setAttribute('title', 'Delete task');
     deleteButton.dataset.index = todoIndex;
     deleteButton.innerHTML = 'X'
     todoButtons.appendChild(deleteButton)
