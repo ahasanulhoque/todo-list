@@ -3,7 +3,6 @@ html, body {
     padding: 0;
     font-family: 'Trebuchet MS', Helvetica, sans-serif;
     font-size: 18px;
-    background: #f2f2f2;
 }
 
 #header {
@@ -12,7 +11,8 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: solid thin;
+    background: #e60000;
+    color: white;
 }
 
 #content {
@@ -22,10 +22,11 @@ html, body {
 #sidebar {
     height: 93vh;
     width: 20vw;
-    border-right: solid thin;
+    border-right: groove thin;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: #f2f2f2;
 }
 
 #sidebar-top-wrapper {
@@ -36,7 +37,7 @@ html, body {
     background: hsl(140, 100%, 30%);
     color: white;
     height: 2rem;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bolder;
     border: thin;
 }
@@ -48,7 +49,6 @@ html, body {
 /*Styling for list of projects in the sidebar*/
 #projects-list {
     width: 20vw;
-    border-top: solid thin;
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
@@ -57,14 +57,16 @@ html, body {
 /*Styling for the buttons in the sidebar*/
 .project-sidebar {
     height: 2rem;
-    color: white;
+    color: black;
     font-weight: bolder;
     border: none;
-    background: hsl(60, 20%, 30%);
+    background: #f2f2f2;
+    text-align: left;
+    padding-left: 4rem;
 }
 
 .project-sidebar:hover {
-    background: hsl(60, 20%, 45%)
+    background: #d6d6c2;
 }
 
 /* #project-full through .low-priority styles the full display of a project
@@ -123,13 +125,13 @@ html, body {
     height: 2rem;
     font-size: 1.1rem;
     font-weight: bolder;
-    background: hsl(210, 100%, 60%);   
+    background: hsl(140, 100%, 30%);   
     color: white;
     border: thin;
 }
 
 #new-todo:hover {
-    background: hsl(210, 100%, 75%);
+    background: hsl(140, 100%, 45%);
 }
 
 .expand-todo,
