@@ -231,6 +231,7 @@ body {
         height: 25vh;
         width: 100vw;
         border-bottom: groove thin;
+        border-right: none;
         display: flex;
         flex-direction: column;
         align-items: center;
