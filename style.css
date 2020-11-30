@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     font-family: 'Trebuchet MS', Helvetica, sans-serif;
@@ -104,7 +105,7 @@ html, body {
 
 .todo-completed {
     text-decoration: line-through;
-    color: hsl(0, 0%, 30%)
+    color: hsl(0, 0%, 30%);
 }
 
 .high-priority {
@@ -125,7 +126,7 @@ html, body {
     height: 2rem;
     font-size: 1.1rem;
     font-weight: bolder;
-    background: hsl(140, 100%, 30%);   
+    background: hsl(140, 100%, 30%);
     color: white;
     border: thin;
 }
@@ -165,7 +166,7 @@ html, body {
 }
 
 .check-todo:hover {
-    background: hsl(260, 100%, 85%)
+    background: hsl(260, 100%, 85%);
 }
 
 .delete-button {
@@ -181,7 +182,6 @@ html, body {
 .delete-button:hover {
     background: hsl(0, 100%, 45%);
 }
-
 
 /*Styling of the forms*/
 
@@ -215,28 +215,13 @@ html, body {
 
 /* Responsive design */
 
-@media screen 
-    and (min-device-width: 901px) 
-    and (max-device-width: 1400px){
+@media screen and (min-width: 901px) and (max-width: 1400px) {
     .project-sidebar {
         padding-left: 2rem;
     }
 }
 
-@media screen 
-    and (max-device-width: 900px){
-    html {
-        font-size: 14px;
-    }
-
-    .project-sidebar {
-        padding-left: 2rem;
-    }
-}
-
-@media screen
-    and (orientation: portrait){
-
+@media screen and (max-width: 900px) {
     #content {
         display: flex;
         flex-direction: column;
@@ -276,6 +261,32 @@ html, body {
         font-size: 0.75rem;
     }
 
+    .todo-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-areas:
+            'expand delete'
+            'edit edit'
+            'check check';
+    }
+
+    .expand-todo {
+        grid-area: expand;
+    }
+
+    .edit-todo {
+        grid-area: edit;
+    }
+
+    .check-todo {
+        grid-area: check;
+    }
+
+    .delete-todo {
+        grid-area: delete;
+    }
+
     #new-todo,
     .edit-button,
     .check-todo {
@@ -284,17 +295,21 @@ html, body {
     }
 
     .expand-todo,
-    .delete-button {
+    .delete-todo {
         height: 1rem;
-        width: 1rem;
+        width: 2rem;
         font-size: 0.5rem;
     }
 
-    #project-buttons,
-    .todo-buttons {
+    #project-buttons {
         display: flex;
         flex-direction: column;
-        text-decoration: none;
+    }
+
+    #delete-project {
+        height: 1rem;
+        width: 4rem;
+        font-size: 0.5rem;
     }
 
     #project-form,
