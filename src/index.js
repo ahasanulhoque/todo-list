@@ -3,6 +3,8 @@ import {
     renderSidebar,
     renderMain,
     removeForm,
+    disableButtons,
+    enableButtons,
 } from './render-page'
 import { Project, deleteToDo, deleteProject } from './project-logic'
 import { toDo, toggleStatus } from './todo-logic'
@@ -80,7 +82,12 @@ const PageController = (() => {
              * Call a function to show a form to create a new project
              */
 
+            // Disable all buttons on page before rendering form
+            const buttons = document.querySelectorAll('button')
+            disableButtons(buttons)
+
             showProjectForm(content, 'Add')
+
             // Select the form now shown on screen
             const form = document.querySelector('form')
 
@@ -109,11 +116,17 @@ const PageController = (() => {
 
                 // Save the project to localStorage
                 saveProjects('projectsList', projectsList)
+
+                // Re-enable buttons
+                enableButtons(buttons)
             }
 
             document.querySelector('#cancel-project').onclick = () => {
                 // Close the form modal if user chooses the cancel button
                 removeForm(content, form)
+
+                // Re-enable buttons
+                enableButtons(buttons)
             }
         }
     }
@@ -131,6 +144,10 @@ const PageController = (() => {
             .getAttribute('data-index')
 
         if (button.id === 'new-todo') {
+            // Disable all buttons on page before rendering form
+            const buttons = document.querySelectorAll('button')
+            disableButtons(buttons)
+
             // Call a form function from a render module
             showToDoForm(content, 'Add')
 
@@ -170,11 +187,17 @@ const PageController = (() => {
 
                 // Save the new todo in localStorage
                 saveProjects('projectsList', projectsList)
+
+                // Re-enable buttons
+                enableButtons(buttons)
             }
 
             document.querySelector('#cancel-todo').onclick = () => {
                 // Close the form modal if user chooses the cancel button
                 removeForm(content, form)
+
+                // Re-enable buttons
+                enableButtons(buttons)
             }
         } else if (button.classList.contains('expand-todo')) {
             expandToDo(
@@ -185,6 +208,10 @@ const PageController = (() => {
                     )
             )
         } else if (button.classList.contains('edit-todo')) {
+            // Disable all buttons on page before rendering form
+            const buttons = document.querySelectorAll('button')
+            disableButtons(buttons)
+
             // Show edit form, pass existing values to pre-populate the form
             showToDoForm(
                 content,
@@ -252,11 +279,17 @@ const PageController = (() => {
 
                 // Save edited todo in localStorage
                 saveProjects('projectsList', projectsList)
+
+                // Re-enable buttons
+                enableButtons(buttons)
             }
 
             document.querySelector('#cancel-todo').onclick = () => {
                 // Close the form modal if user chooses the cancel button
                 removeForm(content, form)
+
+                // Re-enable buttons
+                enableButtons(buttons)
             }
         } else if (button.classList.contains('check-todo')) {
             // projectsList[projectIndex].todos[button.getAttribute('data-index')].toggleStatus();
@@ -311,6 +344,10 @@ const PageController = (() => {
         } else if (button.id === 'edit-project') {
             // Funcitonality to edit project
 
+            // Disable all buttons on page before rendering form
+            const buttons = document.querySelectorAll('button')
+            disableButtons(buttons)
+
             // Show project form again to edit the project
             showProjectForm(content, 'Edit', projectsList[projectIndex].name)
             // Select the form now shown on screen
@@ -344,11 +381,17 @@ const PageController = (() => {
 
                 // Save projects to localStorage, with project edited
                 saveProjects('projectsList', projectsList)
+
+                // Re-enable buttons
+                enableButtons(buttons)
             }
 
             document.querySelector('#cancel-project').onclick = () => {
                 // Close the form modal if user chooses the cancel button
                 removeForm(content, form)
+
+                // Re-enable buttons
+                enableButtons(buttons)
             }
         } else if (button.id === 'delete-project') {
             // Delete project from projectsList array

@@ -115,4 +115,25 @@ const removeForm = (content, form) => {
     content.removeChild(form)
 }
 
-export { renderPage, renderSidebar, renderMain, removeForm }
+// Function to disable all buttons on page
+const disableButtons = (buttons) => {
+    buttons.forEach((button) => {
+        button.setAttribute('disabled', '')
+    })
+}
+
+// Functon to enable all buttons on page
+const enableButtons = (buttons) => {
+    buttons.forEach((button) => {
+        button.removeAttribute('disabled')
+    })
+}
+
+export {
+    renderPage,
+    renderSidebar,
+    renderMain,
+    removeForm,
+    disableButtons,
+    enableButtons,
+}
