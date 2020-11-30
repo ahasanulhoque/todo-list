@@ -1,107 +1,118 @@
-//Below function is immediately executed to load on page load
+// Below function is immediately executed to load on page load
 const renderPage = (() => {
-    const content = document.querySelector('#content');
+    const content = document.querySelector('#content')
 
-    const sidebar = document.createElement('section');
-    sidebar.id = 'sidebar';
+    const sidebar = document.createElement('section')
+    sidebar.id = 'sidebar'
 
-    const sidebarTopWrapper = document.createElement('div');
+    const sidebarTopWrapper = document.createElement('div')
     sidebarTopWrapper.id = 'sidebar-top-wrapper'
 
-    const sidebarTitle = document.createElement('h2');
+    const sidebarTitle = document.createElement('h2')
     sidebarTitle.innerHTML = 'Projects'
-    sidebarTopWrapper.appendChild(sidebarTitle);
+    sidebarTopWrapper.appendChild(sidebarTitle)
 
-    const newProject = document.createElement('button');
-    newProject.innerHTML = 'New Project';
-    newProject.id = 'new-project';
-    sidebarTopWrapper.appendChild(newProject);
+    const newProject = document.createElement('button')
+    newProject.innerHTML = 'New Project'
+    newProject.id = 'new-project'
+    sidebarTopWrapper.appendChild(newProject)
 
-    const sidebarListOfProjects = document.createElement('section');
-    sidebarListOfProjects.id = 'projects-list';
+    const sidebarListOfProjects = document.createElement('section')
+    sidebarListOfProjects.id = 'projects-list'
 
-    sidebar.appendChild(sidebarTopWrapper);
-    sidebar.appendChild(sidebarListOfProjects);
-    content.appendChild(sidebar);
-})();
+    sidebar.appendChild(sidebarTopWrapper)
+    sidebar.appendChild(sidebarListOfProjects)
+    content.appendChild(sidebar)
+})()
 
 const renderSidebar = (projectName, index) => {
-    //render the sidebar
-    //should have project titles
+    /**
+     * render the sidebar
+     * should have project titles
+     */
 
-    const sidebarListOfProjects = document.querySelector('#projects-list');
+    const sidebarListOfProjects = document.querySelector('#projects-list')
 
-    const projectSide = document.createElement('button');  //The sidebar instance of the whole project
-    projectSide.dataset.index = index;
-    projectSide.classList.add('project-sidebar');
-    projectSide.innerHTML = projectName;
+    // The sidebar instance of the whole project
+    const projectSide = document.createElement('button')
+    projectSide.dataset.index = index
+    projectSide.classList.add('project-sidebar')
+    projectSide.innerHTML = projectName
 
-    sidebarListOfProjects.appendChild(projectSide);
+    sidebarListOfProjects.appendChild(projectSide)
 }
 
 const renderMain = (content, projectTitle, index) => {
-    //This function renders the project in full on the page
+    // This function renders the project in full on the page
 
-    //The full view of the project will be a section with id='project-full'
-    //If this section already exists (project is already in full view), remove it:
-    if(document.querySelector('#project-full')){
-        content.removeChild(document.querySelector('#project-full'));
+    /**
+     * The full view of the project will be a section with id='project-full'
+     * If this section already exists (project is already in full view), remove it:
+     */
+
+    if (document.querySelector('#project-full')) {
+        content.removeChild(document.querySelector('#project-full'))
     }
-    
 
-    const projectMainDOM = document.createElement('section');
-    projectMainDOM.id = 'project-full';
-    projectMainDOM.dataset.index = index;                   //Give the div a data-index that is
-                                                            //equal to the project's index in the
-                                                            //project array
+    /**
+     * Give the div a data-index that is equal to the project's index in the
+     * project array
+     */
 
-    //This section will have the project title and buttons to edit the project title or delete
-    //the project
-    const projectTopRow = document.createElement('div');
-    projectTopRow.id = 'project-top-row';
+    const projectMainDOM = document.createElement('section')
+    projectMainDOM.id = 'project-full'
+    projectMainDOM.dataset.index = index
 
-    const projectTitleDOM = document.createElement('h2');
-    projectTitleDOM.innerHTML = projectTitle;
-    projectTopRow.appendChild(projectTitleDOM);
+    /**
+     * This section will have the project title and buttons to edit the project title or delete
+     * the project
+     */
 
-    const projectButtonWrapper = document.createElement('div');
-    projectButtonWrapper.id = 'project-buttons';
+    const projectTopRow = document.createElement('div')
+    projectTopRow.id = 'project-top-row'
 
-    const newToDo = document.createElement('button');
-    newToDo.innerHTML = 'New Task';
-    newToDo.id = 'new-todo';
-    newToDo.setAttribute('title', 'New task');
-    projectButtonWrapper.appendChild(newToDo);
+    const projectTitleDOM = document.createElement('h2')
+    projectTitleDOM.innerHTML = projectTitle
+    projectTopRow.appendChild(projectTitleDOM)
 
-    const editProjectButton = document.createElement('button');
-    editProjectButton.id = 'edit-project';
-    editProjectButton.classList.add('edit-button');
-    editProjectButton.setAttribute('title', 'Edit Project');
-    editProjectButton.innerHTML = 'Edit Project';
-    projectButtonWrapper.appendChild(editProjectButton);
+    const projectButtonWrapper = document.createElement('div')
+    projectButtonWrapper.id = 'project-buttons'
 
-    const deleteProjectButton = document.createElement('button');
-    deleteProjectButton.id = 'delete-project';
-    deleteProjectButton.classList.add('delete-button');
-    deleteProjectButton.setAttribute('title', 'Delete Project');
-    deleteProjectButton.innerHTML = 'X';
-    projectButtonWrapper.appendChild(deleteProjectButton);
+    const newToDo = document.createElement('button')
+    newToDo.innerHTML = 'New Task'
+    newToDo.id = 'new-todo'
+    newToDo.setAttribute('title', 'New task')
+    projectButtonWrapper.appendChild(newToDo)
 
-    projectTopRow.appendChild(projectButtonWrapper);
+    const editProjectButton = document.createElement('button')
+    editProjectButton.id = 'edit-project'
+    editProjectButton.classList.add('edit-button')
+    editProjectButton.setAttribute('title', 'Edit Project')
+    editProjectButton.innerHTML = 'Edit Project'
+    projectButtonWrapper.appendChild(editProjectButton)
 
-    projectMainDOM.appendChild(projectTopRow);
-    
-    //This section will have all the todos
-    const toDosDOM = document.createElement('secton');
-    toDosDOM.id = 'todos-list';
-    projectMainDOM.appendChild(toDosDOM);
-   
-    content.appendChild(projectMainDOM);
+    const deleteProjectButton = document.createElement('button')
+    deleteProjectButton.id = 'delete-project'
+    deleteProjectButton.classList.add('delete-button')
+    deleteProjectButton.setAttribute('title', 'Delete Project')
+    deleteProjectButton.innerHTML = 'X'
+    projectButtonWrapper.appendChild(deleteProjectButton)
+
+    projectTopRow.appendChild(projectButtonWrapper)
+
+    projectMainDOM.appendChild(projectTopRow)
+
+    // This section will have all the todos
+    const toDosDOM = document.createElement('secton')
+    toDosDOM.id = 'todos-list'
+    projectMainDOM.appendChild(toDosDOM)
+
+    content.appendChild(projectMainDOM)
 }
 
-//Function to remove form when it is submitted or canceled
+// Function to remove form when it is submitted or canceled
 const removeForm = (content, form) => {
-    content.removeChild(form);
+    content.removeChild(form)
 }
 
-export { renderPage, renderSidebar , renderMain , removeForm };
+export { renderPage, renderSidebar, renderMain, removeForm }
