@@ -257,7 +257,7 @@ body {
     }
 
     #project-full {
-        padding-top: 1rem;
+        padding: 1rem;
         width: 90vw;
         font-size: 0.75rem;
     }
