@@ -79,7 +79,8 @@ body {
     padding: 0rem 1.5rem;
     height: 93vh;
     width: 80%;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #project-top-row {
@@ -240,6 +241,7 @@ body {
         flex-direction: column;
         align-items: center;
         background: #f2f2f2;
+        overflow: hidden;
     }
 
     #sidebar-top-wrapper {
@@ -261,7 +263,8 @@ body {
     }
 
     #project-full {
-        padding: 1rem;
+        padding: 1rem 1rem 1rem 1.7rem;
+        height: 60vh;
         width: 90vw;
         font-size: 0.75rem;
     }
@@ -323,5 +326,11 @@ body {
         left: 0;
         right: 0;
         border: thin;
+    }
+}
+
+@media screen and (max-width: 476px) {
+    #project-full {
+        width: 85vw;
     }
 }
