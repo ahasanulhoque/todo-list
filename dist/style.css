@@ -28,6 +28,8 @@ body {
     flex-direction: column;
     align-items: center;
     background: #f2f2f2;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #sidebar-top-wrapper {
@@ -75,7 +77,9 @@ body {
 
 #project-full {
     padding: 0rem 1.5rem;
+    height: 93vh;
     width: 80%;
+    overflow: auto;
 }
 
 #project-top-row {
